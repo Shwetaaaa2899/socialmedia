@@ -162,9 +162,9 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
 
     
            //4.crate and add the post
-           const createPostHandler = async({input}) =>{
+           const createPostHandler = async(input) =>{
           
-            try{
+           try{
               const passObj = {postData:input}
             
 
@@ -175,10 +175,10 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
       authorization:token},
       body:JSON.stringify(passObj)
       })
-      console.log("receieved input",response)
+
               if(response.status === 201){
                 const {posts} = await response.json()
-                console.log("post is",posts)
+                // console.log("post is",posts)
                 dispatch({type:"CREATE-A-POST",payload:posts})
               }
             }
@@ -243,7 +243,7 @@ const getFeeds = ()=>{
 
         //
         const deletePostHandler = async(deletePost) =>{
-          console.log("receieved input",deletePost)
+          // console.log("receieved input",deletePost)
           try{
             const passObj = {data:deletePost}
             
@@ -278,7 +278,44 @@ const getFeeds = ()=>{
 
 
 
+/**
+ * This handler handles updating a post in the db.
+ * send POST Request at /api/posts/edit/:postId
+ * body contains { postData }
+ **/
+ const editPostHandler = async(postId,updatedPost) =>{
+  
+  const passObj = {postData:updatedPost}
+  console.log("id n post is",passObj)
+  try{
+    const request = await fetch(`/api/posts/edit/${postId}`,
+   {
+      method:"POST",
+   headers:{'Accept':'application/json',
+'Content-Type':'application/json',
+authorization:token},
+body:JSON.stringify(passObj)
+});
+console.log(request)
+if(request.status === 201){
+  const {posts} = await request.json()
+  // console.log("from edit",response)
 
+   dispatch({type:"EDIT-POST",payload:posts})
+            
+}
+if(request.status === 400){
+  toast("Cannot edit a Post doesn't belong to the logged in User.")
+}
+
+    
+
+  }
+  catch(e){
+
+    console.log("something went wrong while edititng")
+  }
+ }
 
 
 
@@ -289,6 +326,7 @@ const getFeeds = ()=>{
    deletePostHandler,
    bookMarkPostHandler,
    isBookMarked,
+   editPostHandler,
    getAllUserPostsHandler,likePostHandler,createPostHandler,getFeeds}}>{children}</PostsProviderkey.Provider>
 }
 

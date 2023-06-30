@@ -6,17 +6,29 @@ import { AiFillHeart } from "react-icons/ai";
 import { usePostsContext } from "../context/postcontext";
 import { useAuth } from "../context/authcontext";
 import {BsFillBookmarkFill} from "react-icons/bs";
+import EditPost from "./Home/EditPostModal";
+import { toast } from "react-toastify";
+import {useState} from "react";
 const Post = ({post,isLiked}) =>{
     const{state,likePostHandler,dispatch,
       deletePostHandler,
-      isBookMarked,bookMarkPostHandler} = usePostsContext()
+      isBookMarked,bookMarkPostHandler,editPostHandlerr} = usePostsContext()
    const {userInfo } =  useAuth()
-  
+   const[modal,setModal] = useState(false)
+ 
+   
    const editPost = (e, post)=>{
-    
-    e.preventDefault();
-    console.log(post)
-    dispatch({type:"EDIT-POST",payload:post})
+    e.preventDefault()
+  //  if(userInfo.username !== post.username) {
+  //   toast("U cant edit this")
+  //  }
+
+  //  else if( userInfo.username === post.username){
+  //   setModal(true)
+  //  }
+  
+  setModal(true)
+
     
    }
  
@@ -56,6 +68,10 @@ const Post = ({post,isLiked}) =>{
  
     </div>
 
+
+{
+  modal && <EditPost updatedPost = {post}  setModal = {setModal}/>
+}
     </>
 
 }

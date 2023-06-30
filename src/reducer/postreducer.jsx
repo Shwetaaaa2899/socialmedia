@@ -24,8 +24,8 @@ const PostReducer  = (state,action) =>{
             case "DELETE-POST":
               // return {...state,search:action.payload}
               case "EDIT-POST":
-                // console.log("post is red",action.payload)
-                return {...state,editPost:action.payload}
+                console.log("post is red",action.payload)
+                return {...state,posts:action.payload}
     
                 case "LIKED-A-POST":
                   const {LikedPosts, likedPostId} =  action.payload
