@@ -121,11 +121,11 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
       }})
 
         if(response.status === 201){
-          const LikedPosts= await response.json()
+          const {posts}= await response.json()
           // const {LikedPosts, likedPostId} =  action.payload
-
+console.log("liked posts is",posts)
          
-          dispatch({type:"LIKED-A-POST",payload:{LikedPosts, likedPostId}})
+          dispatch({type:"LIKED-A-POST",payload:posts})
           toast.success("Post Liked")
         }
         else if(response.status === 400){
@@ -140,7 +140,9 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
       }
 
     }
-        
+        const isLiked = (postID) =>{
+  return state?.posts?.find((post) => post._id === postID)?.likes?.likedBy.some((user) =>user.username === userInfo.username )
+        }
     
       // console.log(state.posts[state.posts.indexOf(state.posts.likes)])
     
@@ -180,6 +182,7 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
                 const {posts} = await response.json()
                 // console.log("post is",posts)
                 dispatch({type:"CREATE-A-POST",payload:posts})
+                toast.success("Post created successfully !")
               }
             }
             catch(e){
@@ -217,13 +220,13 @@ const getSortedPosts = (posts, sortBy) => {
     // console.log(resp)
  if(isBookMarked){
 dispatch({type:"REMOVE-BOOMARK-POST",payload:post}) 
-  toast.success(" Post BookMarked")
+  toast.success("Removed from BookMarked Successfully")
  }  
     else{
 
       
     dispatch({type:"ADD-BOOMARK-POST",payload:post}) 
- toast.success("Post UnBookMarked ")
+ toast.success("Post BookMarked Successfully ")
     }
     
   
@@ -241,25 +244,27 @@ const getFeeds = ()=>{
   }
 
 
-        //
-        const deletePostHandler = async(deletePost) =>{
-          // console.log("receieved input",deletePost)
-          try{
-            const passObj = {data:deletePost}
-            
+        ///api/user/posts/--/api/posts/:postI
+        const deletePostHandler = async(postId) =>{
+          console.log("receieved input",postId)
+      
+      
 
-            const response = await fetch(`/api/posts/${deletePost._id}`
+          try{
+            console.log("response for deleting is")
+       const response = await fetch(`/api/posts/${postId}`
             ,{
-           method:"POST",
+           method:"DELETE",
         headers:{'Accept':'application/json',
     'Content-Type':'application/json',
     authorization:token}
     })
-    console.log("resp input",response)
+    console.log("response for deleting is",response)
             if(response.status === 201){
               const {posts} = await response.json()
               console.log("post is",posts)
               dispatch({type:"DELETE-POST",payload:posts})
+              toast.success("Post deleted successfully")
             }
           
 
@@ -302,6 +307,7 @@ if(request.status === 201){
   // console.log("from edit",response)
 
    dispatch({type:"EDIT-POST",payload:posts})
+   toast.success("Post updated successfully !")
             
 }
 if(request.status === 400){
@@ -327,6 +333,7 @@ if(request.status === 400){
    bookMarkPostHandler,
    isBookMarked,
    editPostHandler,
+   isLiked,
    getAllUserPostsHandler,likePostHandler,createPostHandler,getFeeds}}>{children}</PostsProviderkey.Provider>
 }
 

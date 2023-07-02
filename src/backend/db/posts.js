@@ -51,8 +51,8 @@ export const posts = [
         _id: "d4c40a4d-7800-4ad4-8d1e-8f1375e9ad43",
         username: "sophieclark",
         avatarUrl:
-          "https://res.cloudinary.com/dptfwcnro/image/upload/v1685595920/SocialBuzz/images_qynsis.jpg",
-        text:
+        "https://impulse.aarafacademy.com/uploads/samples/g1.jpg",
+         text:
           "Such profound and inspiring words! Thank you for this beautiful thread!",
         votes: {
           upvotedBy: [],
@@ -91,8 +91,8 @@ export const posts = [
         _id: "c37e0491-df4e-4cfd-9b50-8c0e69c012c5",
         username: "jameswilson",
         avatarUrl:
-          "https://res.cloudinary.com/dptfwcnro/image/upload/v1685595800/SocialBuzz/images_wxjv0c.jpg",
-        text:
+          "https://impulse.aarafacademy.com/uploads/samples/g1.jpg",
+           text:
           "Kindness is contagious!✨ Let's create a ripple effect of positivity and compassion.",
         votes: {
           upvotedBy: [],
@@ -187,6 +187,9 @@ export const posts = [
           upvotedBy: [],
           downvotedBy: [],
         },
+            username: "chhakulizingare",
+    createdAt: new Date("10/02/2021"),
+    updatedAt: formatDate(),
       },
       {
         _id: "f34059b3-11d5-4a1d-936f-9e23dabf67f0",

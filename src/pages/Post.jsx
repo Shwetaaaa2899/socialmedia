@@ -9,12 +9,19 @@ import {BsFillBookmarkFill} from "react-icons/bs";
 import EditPost from "./Home/EditPostModal";
 import { toast } from "react-toastify";
 import {useState} from "react";
-const Post = ({post,isLiked}) =>{
+import {useUserContext} from "../context/usercontext"
+import "./Post.css"
+const Post = ({post}) =>{
+
     const{state,likePostHandler,dispatch,
       deletePostHandler,
-      isBookMarked,bookMarkPostHandler,editPostHandlerr} = usePostsContext()
-   const {userInfo } =  useAuth()
+      isLiked,
+      
+      isBookMarked,bookMarkPostHandler,editPostHandler} = usePostsContext()
+   const {userInfo} =  useAuth()
+   const {getUserInfoByUserName }= useUserContext()
    const[modal,setModal] = useState(false)
+
  
    
    const editPost = (e, post)=>{
@@ -31,28 +38,47 @@ const Post = ({post,isLiked}) =>{
 
     
    }
+ const userDetails =  getUserInfoByUserName(post.username)
  
 
-    return <> 
+    return <div className = "container"> 
 
-    <div className = "user-container" style = {{dispaly :"flex",flex:2,border : "2px solid black",textAlign:"center"}} >
-  
-  <div>
-{post.createdAt}
+
+    
+
+    
+
+    <div className = "User-profile"  >
+
+   <img   className = "User-profile-picture" src = {userDetails?.avatarUrl} />
+   <div className = "User-profile-name">
+   {userDetails.firstName}  {userDetails.lastName}
+   </div>
+   <div className = "User-profile-username">
+  <NavLink to  = {`/api/posts/user/${post.username}`} >
+     
+     
+     {post.username}</NavLink>
   </div>
-        <NavLink to  = {`/api/posts/user/${post.username}`}>
+   
+   <div className = "User-profile-createdDate">
+{userDetails.createdAt}
+  </div>
+
+  
+ 
+
+
+      
      
-     
-        {post.username}</NavLink>
-        <img  src = {post?.avatarUrl} />
         <span><h4>{post?.content}</h4></span>
         <span>Liked: <h4>{isLiked(post._id)?"yes":"no"}</h4></span>
         
 
-        <img src =  {post.mediaURL} />
-        {/* style = {{color: handlewishlistCheck(product)?"red":"black"}} */}
-      {/* {  console.log(post?.liked)} */}
-        <div    style = {{color : isLiked(post._id)?"red":"grey"}} onClick={ 
+        <img src =  {post?.mediaURL} />
+       
+        <div  style = {{color:isLiked(post._id)?"red":"black"}}
+           onClick={ 
             () => {
                
             likePostHandler(post._id)
@@ -63,7 +89,7 @@ const Post = ({post,isLiked}) =>{
      </div>
      <div style = {{color: isBookMarked(post)?"orange":"grey"}} onClick ={()=>bookMarkPostHandler(post)}><BsFillBookmarkFill /></div>
      <button onClick ={(e)=>editPost(e,post)}>Edit</button>
-     <button onClick ={()=>deletePostHandler(post)}>Delete</button>
+     <button onClick ={()=>deletePostHandler(post._id)}>Delete</button>
   
  
     </div>
@@ -72,7 +98,8 @@ const Post = ({post,isLiked}) =>{
 {
   modal && <EditPost updatedPost = {post}  setModal = {setModal}/>
 }
-    </>
+    </div>
 
 }
 export default Post;
+

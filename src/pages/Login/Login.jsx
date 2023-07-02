@@ -2,7 +2,7 @@ import { useAuth } from "../../context/authcontext"
 import { useNavigate ,NavLink,useLocation} from "react-router-dom"
 import { toast } from "react-toastify"
 import { useState} from "react"
-
+import "./Login.css"
 // import "./css/Form.css"
 export default function Login() {
    const location = useLocation()

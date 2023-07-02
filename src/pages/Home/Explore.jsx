@@ -12,7 +12,7 @@ const Explore = () =>{
   const[liked,setLiked] = useState()
     const {state:{posts,userprofile},getAllUserPostsHandler,getPosts,likePostHandler} = usePostsConext()
     // const [postsToBeShown,setpostsToBeShown] = useState(posts)
-    console.log(posts)
+    // console.log(posts)
     useEffect(()=>{
 if(liked){
   console.log("called-1")

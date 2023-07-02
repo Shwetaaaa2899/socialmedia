@@ -14,7 +14,7 @@ const BookMark = () =>{
     return <>
 
 {
-    bookMark?.length>0 ? bookMark?.map((post)=> <Post key={post._id} post = {post}/> )
+    bookMark?.length>0 ? bookMark?.map((post)=> <Post key={post._id} post = {post} /> )
     :<h3>No BookMarked Posts by you </h3>
 
 }

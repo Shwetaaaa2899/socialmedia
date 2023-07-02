@@ -1,12 +1,15 @@
 import "./Modal.css"
-import {useState} from "react";
+import {useState, useRef} from "react";
 import {MdOutlinePhotoCamera} from "react-icons/md"
 import {BsEmojiSmile} from "react-icons/bs"
 import { v4 as uuid } from "uuid";
 import {usePostsContext } from "../../context/postcontext"
 import EmojiPicker from 'emoji-picker-react';
+import {TbLetterX} from "react-icons/tb"
 const  EditPost = ({updatedPost,setModal}) =>{
     const {editPostHandler} =usePostsContext()
+    const inputRef = useRef()
+
   
      const [updatedPostContent, setUpdatedPostContent] = useState(updatedPost.content);
     const [updatedPostImage, setUpdatedPostImage] = useState(updatedPost.mediaURL);
@@ -21,6 +24,8 @@ const  EditPost = ({updatedPost,setModal}) =>{
 
         ///post.likes.likedby.find(({id})=> userInfo._id ) --> "red" --> liek ka logic
     const modalHandler = (e) =>{
+
+        
         if(e.target.className === "modal-container"){
             setModal(false)
         }
@@ -33,6 +38,16 @@ const  EditPost = ({updatedPost,setModal}) =>{
             // dispatch({type:"CREATE-A-POST",payload:input})
             setModal(false)
        
+    }
+    const ImageClickHandler = () =>{
+        inputRef.current.click()
+    
+    }
+    const ImageInputHandler = (e) =>{
+        console.log("Img changes ",e.target.files[0])
+        setUpdatedPostImage(URL.createObjectURL(e.target.files[0]))
+
+
     }
 
 return <>
@@ -49,12 +64,25 @@ return <>
         </div>
         <div>
       
+        {
+            updatedPostImage?
+            <div><img  className = "post-image-create-modal"  style = {{height:"100px"
+     , width:"100px", marginLeft:"20px"}}  src = { updatedPostImage} />
+    
+
+     <TbLetterX onClick ={() => setUpdatedPostImage("")} />
+
+   
+      </div>
+     :
+            <div>
+            <MdOutlinePhotoCamera  onClick = {ImageClickHandler}  /> 
       
-       <input value = {updatedPost.mediaURL}  type="image" id="image" alt="submit" src="#" name = "mediaURL"  />
-     {/* <MdOutlinePhotoCamera /> */}
-       
+      <input  type="file" name = "mediaURL"   onChange = {ImageInputHandler}    ref= {inputRef}  style={{display:"none"}} />
+   
      
-     {/* <EmojiPicker  /> */}
+            </div>
+        }
         </div>
         <button onClick = {EditPostEventHandler} >Save Changes</button>
 

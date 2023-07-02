@@ -20,7 +20,7 @@ const PostReducer  = (state,action) =>{
           console.log("post added",action.payload)
 
            
-            return { ...state,posts: [...state.posts, action.payload]}
+            return { ...state,posts:action.payload}
             case "DELETE-POST":
               // return {...state,search:action.payload}
               case "EDIT-POST":
@@ -28,11 +28,13 @@ const PostReducer  = (state,action) =>{
                 return {...state,posts:action.payload}
     
                 case "LIKED-A-POST":
-                  const {LikedPosts, likedPostId} =  action.payload
+                  console.log(action.payload)
+          //         const {LikedPosts, likedPostId} =  action.payload
 
-           const likedPostByUser = state?.posts?.find((post) => post._id === likedPostId)
-           console.log("got posts from context",likedPostId,LikedPosts,"post found to be added in liked",likedPostByUser)
-                return  {...state, posts:LikedPosts.posts, likedPosts:[...state.likedPosts,likedPostByUser]}
+          //  const likedPostByUser = state?.posts?.find((post) => post._id === likedPostId)
+          //  console.log("got posts from context",likedPostId,LikedPosts,"post found to be added in liked",likedPostByUser)
+                return  {...state, posts:action.payload}
+                  // , likedPosts:[...state.likedPosts,likedPostByUser]}
                
                 case "UNLIKE-A-POST":
                   const {UnLikedPosts, UnLikedPostId} =  action.payload

@@ -1,5 +1,87 @@
-.container{
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.main-container{
     display:flex;
-    align-items:column;
-    color:brown
+    align-items:center;
+   background-color: aqua;
+   height:80vh;
+ 
+   width:20%;
+
+}
+.icon{
+    color:black;
+}
+.sidebar{
+    width:30%;
+    padding:20px;
+    position:sticky
+
+  
+}
+.link{
+    display:flex;
+    gap: 10px;
+    color:grey ;
+    padding:15px 10px;
+    overflow: hidden;
+    border-right:4px solid transparent;
+    font-weight: bold;
+
+
+}
+.link:hover{
+    border-right:4px solid white;
+    /* transition:0.2s; */
+    background: peru;
+    border-radius: 20%;
+}
+a{
+    text-decoration: none;
+}
+.text{
+    font-size: 20px;
+}
+main{
+    padding: 20px;
+    margin-top: 60%;
+}
+.icon{
+    font-size:30px;
+}
+
+   
+button{
+        /* display: block; */
+     text-decoration: none;
+        margin: auto;
+        /* //to get it in center hrizontally */
+    
+    
+    }
+    button{
+        padding:0.5rem 1rem;
+
+        background-color:cadetblue;
+        /* display:none; */
+       
+    }
+    .btn{
+        display:flex;
+        padding:15px 10px;
+        color:black;
+        border-radius:10%;
+    }
+    
+.outlet-component{
+    width:60%
+}
+.right-bar{
+    width:20%
 }

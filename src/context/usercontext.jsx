@@ -134,7 +134,6 @@ const UnFollowUser = async(id) =>{
 
    }
 
-   
 /**
  *3 This handler handles get a user from userId in the db.
  * send GET Request at /api/users/:userId
@@ -154,6 +153,11 @@ const UnFollowUser = async(id) =>{
  }
 
 
+ const getUserInfoByUserName = (username) => {
+
+    return  state.users.find((user) => user.username === username)
+  
+     }
 const isFollowing =(followedUser)=> { 
   const resp =  userInfo?.following?.some((user) => Number(user._id ) === Number(followedUser._id))
 //   console.log(userInfo?.following,followedUser,resp)
@@ -165,7 +169,7 @@ const isFollowing =(followedUser)=> {
 
  }
 
-    const ValuesToBePassed = {state,FollowUser,UnFollowUser,updateProfile,dispatch,getUserHandler,isFollowing}
+    const ValuesToBePassed = {state,FollowUser,getUserInfoByUserName,UnFollowUser,updateProfile,dispatch,getUserHandler,isFollowing}
     return <UserProviderKey.Provider value = {ValuesToBePassed}>{children}</UserProviderKey.Provider>
 }
 // export default UserProvider;
