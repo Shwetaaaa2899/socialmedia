@@ -4,27 +4,43 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    border:0;
+    /* background-color:aliceblue; */
 }
 
 .main-container{
     display:flex;
-    align-items:center;
-   background-color: aqua;
-   height:80vh;
+  height:80vh;
+  margin-top:40px;
+  /* align-items: start; */
  
-   width:20%;
+   width:100%;
+   gap:1rem;
 
 }
 .icon{
     color:black;
 }
 .sidebar{
-    width:30%;
-    padding:20px;
-    position:sticky
-
-  
+    position:sticky;  
+    width:15%; 
+    margin-left:10px;
+    /* position:fixed;     */
+     
 }
+    /* height:100vh;
+    width:20%;
+    height:max-content;
+    padding:20px;
+   
+    /* padding-top: 20em; */
+ /* background-color:aliceblue;
+ margin-top:20vh;
+  */
+  
+
 .link{
     display:flex;
     gap: 10px;
@@ -39,8 +55,9 @@
 .link:hover{
     border-right:4px solid white;
     /* transition:0.2s; */
-    background: peru;
+    background: blanchedalmond;
     border-radius: 20%;
+    color:black
 }
 a{
     text-decoration: none;
@@ -48,10 +65,7 @@ a{
 .text{
     font-size: 20px;
 }
-main{
-    padding: 20px;
-    margin-top: 60%;
-}
+
 .icon{
     font-size:30px;
 }
@@ -80,8 +94,16 @@ button{
     }
     
 .outlet-component{
-    width:60%
+    width:60%;
+    height:100vh;
+    /* padding-top: 2em; */
+   
 }
 .right-bar{
-    width:20%
+    width:20%;
+right:0;
+height:100dvh;
+position:sticky;
+top:0;
+/* padding-top: 10em; */
 }

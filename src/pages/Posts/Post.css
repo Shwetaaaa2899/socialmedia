@@ -1,0 +1,142 @@
+.User-profile{
+    display:flex;
+    /* flex-direction: column; */
+    
+
+}
+
+
+.User-profile-picture > img{
+    width:2em;
+    height:2em;
+    border-radius: 100%;
+    margin : 15px 5px;
+
+}
+.User-profile-name{
+    font-size: 20px;
+    margin : 15px 5px;
+
+}
+
+.User-profile-username{
+    margin-left :2px ;
+    margin-top:35px;
+    align-items: flex-start;
+
+}
+*{
+    margin:0;
+    padding:0;
+   box-sizing:border-box;
+}
+.User-profile-createdDate{
+    margin-top: 20px;
+    /* margin-left:10px; */
+    margin-left :2px ;
+
+
+}
+.image > img{
+    height:50vh;
+    width:90%;
+    /* border-radius: 20px; */
+    /* flex-wrap: wrap; */
+    /* display: flex; */
+}
+.message > h4{
+    font-size: 14px;
+  
+    /* display: flex; */
+    /* justify-content: center; */
+    text-align: left;
+    margin:5px;
+  
+}
+/*
+/* body{ */
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:#fff
+} */ 
+/* 
+.container{
+    position:relative;
+    width:300px;
+    height:400px;
+    background:#fff;
+    box-shadow: 15px 15px 60px rgba(0.0.0.0.15);
+    padding:20px
+
+} */ 
+.post-container{
+    height:80vh;
+    width:80%;
+    justify-content: center;
+    /* align-items: center; */
+    margin-left: 100px;
+    margin-bottom:30px;
+    box-shadow: 0px 0px 7px gray;
+    gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+.user-profile-container{
+    height:10vh;
+    display: flex;
+    width:100%;
+    position: relative;
+    /* flex-direction: column; */
+    color:black
+
+}
+.drop-down{
+    right:0;
+    position: absolute;
+}
+h4{
+    text-align: left;
+    padding:2px;
+    
+}
+.options{
+    background-color: white;
+    box-shadow: 0px 0px 7px gray;
+    border-radius: 10%;
+    right:0;
+    position: absolute;
+    width:80px;
+    right:10px;
+    top : 12px;
+}
+li:hover{
+background-color:lightgray;
+   
+}
+li{
+    /* background-color: bisque; */
+    border:1px solid black;
+    width:100%;
+    color:black;
+    text-align: center;
+    /* margin:5px; */
+    /* padding:2px; */
+}
+
+.action-btn{
+
+    padding:10px;
+margin-top: 5px;
+margin-bottom: 2px;
+ display: flex;
+
+
+}
+.icon{
+    padding:5px;
+    margin:2px;
+ 
+}

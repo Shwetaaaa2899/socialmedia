@@ -1,8 +1,8 @@
 import Home from "./Home"
 // import LeftBar from "./LeftBar"
 import Header from "./Header/Header"
-import Users from "./Users"
-import CreatePost from "./Modal"
+import Users from "./User/Users"
+import CreatePost from "./CreatePostModal/Modal"
 const MainContainer = () =>{
  return <>
   <div>

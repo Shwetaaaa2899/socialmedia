@@ -53,23 +53,7 @@ const [state,dispatch] = useReducer(PostReducer,initialState)
     }
    
 
-    //2.quest at  /api/posts/user/:username
-  const getAllUserPostsHandler = async(username) =>{
-  try{
-    const response = await fetch(`/api/posts/user/${username}`)
-    console.log("post id is",response)
-    if(response.status === 200){
-      console.log(200)
-      const {posts} = await response.json()
-  
-      dispatch({type:"USER-SPECIFIC-POSTS",payload:posts})
-
-    }
-
-  }
-  catch(e){}
-
-  }
+ 
     // useEffect(()=>{  
     //   getPosts();
     //    },[])
@@ -144,23 +128,6 @@ console.log("liked posts is",posts)
   return state?.posts?.find((post) => post._id === postID)?.likes?.likedBy.some((user) =>user.username === userInfo.username )
         }
     
-      // console.log(state.posts[state.posts.indexOf(state.posts.likes)])
-    
-// const LikedPosts = () => {
-//   const [postsLikedByUser, setPostsLikedByUser] = useState([]);
-
-  // const { allPosts } = useSelector((state) => state.post);
-  // const { user } = useSelector((state) => state.auth);
-
-  // useEffect(() => {
-  //   const likedPosts = allPosts.filter((currPost) =>
-  //     currPost.likes.likedBy.find(
-  //       (currUser) => currUser.username === user?.username
-  //     )
-  //   );
-  //   setPostsLikedByUser(likedPosts);
-  // }, [allPosts, user]);
-
 
     
            //4.crate and add the post
@@ -246,12 +213,11 @@ const getFeeds = ()=>{
 
         ///api/user/posts/--/api/posts/:postI
         const deletePostHandler = async(postId) =>{
-          console.log("receieved input",postId)
-      
+          
       
 
           try{
-            console.log("response for deleting is")
+          
        const response = await fetch(`/api/posts/${postId}`
             ,{
            method:"DELETE",
@@ -259,8 +225,10 @@ const getFeeds = ()=>{
     'Content-Type':'application/json',
     authorization:token}
     })
-    console.log("response for deleting is",response)
-            if(response.status === 201){
+    if(response.status ===    400){
+      toast("You cannot delete this post")
+    }
+            if(response.status === 201 || response.status === 200){
               const {posts} = await response.json()
               console.log("post is",posts)
               dispatch({type:"DELETE-POST",payload:posts})
@@ -334,26 +302,11 @@ if(request.status === 400){
    isBookMarked,
    editPostHandler,
    isLiked,
-   getAllUserPostsHandler,likePostHandler,createPostHandler,getFeeds}}>{children}</PostsProviderkey.Provider>
+   likePostHandler,createPostHandler,getFeeds}}>{children}</PostsProviderkey.Provider>
 }
 
 
 export default PostsProvider;
 export const usePostsConext = () => useContext(PostsProviderkey)
 
-// import {
-//   addComment,
-//   addPost,
-//   deleteComment,
-//   deletePost,
-//   editComment,
-//   editPost,
-//   getAllPostsFromServer,
-//   likePost,
-//   dislikePost,
-//   bookmarkPost,
-//   unBookmarkPost,
-//   getBookmarks,
-//   getPostsByUserName,
-// } from "services";
 

@@ -12,7 +12,7 @@ export const posts = [
     content:
       "Just finished working on a new frontend project. Excited to launch🚀 it soon!",
     mediaURL:
-      "https://res.cloudinary.com/dptfwcnro/image/upload/v1685682799/SocialBuzz/photo-1544256718-3bcf237f3974_qmlyoo.avif",
+    "https://th.bing.com/th/id/OIP.m4bRYb_oIIaqailfr3L6ygHaEK?pid=ImgDet&rs=1",
     likes: {
       likeCount: 10,
       likedBy: [],
@@ -39,8 +39,8 @@ export const posts = [
   {
     _id: "4ff5dcfa-1a45-45bc-9d9a-3286c10dc8e3",
     content:
-      "Life is a beautiful journey filled with ups and downs, twists and turns, and countless moments that shape who we are. It's a canvas upon which we paint our dreams, hopes, and aspirations. Along the way, we encounter challenges that test our resilience and setbacks that teach us valuable lessons. It's in these moments that we discover our true strength and capacity for growth. 💫",
-    mediaURL: "",
+      "Life is a beautiful journey filled with ups and downs,  twists and turns, and countless moments that shape who we are. It's a canvas upon which we paint our dreams, hopes, and aspirations."
+   , mediaURL: "https://th.bing.com/th/id/OIP.a-IUaPoVss9_LHTk5y4xEwHaEO?pid=ImgDet&rs=1",
     likes: {
       likeCount: 20,
       likedBy: [],
@@ -60,7 +60,7 @@ export const posts = [
         },
       }
     ],
-    username: "chhakulizingare",
+    username: "shwetaj",
     createdAt: new Date("12/05/2021"),
     updatedAt: formatDate(),
   },
@@ -68,7 +68,7 @@ export const posts = [
     _id: "97e6b4d7-2a94-4a7d-bff0-458d846c833e",
     content: "Spread kindness like confetti! 🎉✨",
     mediaURL:
-      "https://res.cloudinary.com/dptfwcnro/image/upload/v1685938199/SocialBuzz/photo-1581998392741-67879e0ef04a_mcubiw.avif",
+      "https://www.summitkids.com/wp-content/uploads/2018/03/raising-kind-generous-respectful-kids-five-tips.jpg",
     likes: {
       likeCount: 8,
       likedBy: [],
@@ -100,7 +100,7 @@ export const posts = [
         },
       },
     ],
-    username: "chhakulizingare",
+    username: "shwetaj",
     createdAt: new Date("08/03/2022"),
     updatedAt: formatDate(),
   },
@@ -108,7 +108,7 @@ export const posts = [
     _id: "a7e9dd2d-48a4-4f6c-86de-6fc02a67c8a5",
     content:
       "Exploring new web design trends. Can't wait to implement them in my next project! 😃🚀",
-    mediaURL: "",
+    mediaURL: "https://th.bing.com/th/id/OIP.4ttSBLTYgKLLfcDvM5wbuAHaE8?pid=ImgDet&rs=1",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -139,7 +139,7 @@ export const posts = [
     content:
       "Captured some breathtaking landscapes today. Photography is my passion! 📸🌄",
     mediaURL:
-      "https://res.cloudinary.com/dptfwcnro/image/upload/v1685682890/SocialBuzz/photo-1563791877359-4a03fb576945_xekyeo.avif",
+      "https://th.bing.com/th/id/OIP.KyUwTl28keq1d-pbjsd_PQHaEo?pid=ImgDet&rs=1",
     likes: {
       likeCount: 0,
       likedBy: [],
@@ -203,7 +203,7 @@ export const posts = [
         },
       },
     ],
-    username: "chhakulizingare",
+    username: "shwetaj",
     createdAt: new Date("10/02/2021"),
     updatedAt: formatDate(),
   },
@@ -302,7 +302,7 @@ export const posts = [
   {
     _id: "d4e5f6g7-5i6j-7k8l-9m0n-1o2p3q4r5s6",
     content: "Just completed a challenging workout. Feeling energized! 💪💥",
-    mediaURL: "",
+    mediaURL: "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/health/wp-content/uploads/2021/07/BestTimeToWorkout.jpeg.jpg",
     likes: {
       likeCount: 0,
       likedBy: [],

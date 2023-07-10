@@ -3,8 +3,9 @@ import {useState, useRef} from "react";
 import {MdOutlinePhotoCamera} from "react-icons/md"
 import {BsEmojiSmile} from "react-icons/bs"
 import { v4 as uuid } from "uuid";
-import {usePostsContext } from "../../context/postcontext"
+import {usePostsContext } from "../../../context/postcontext"
 import EmojiPicker from 'emoji-picker-react';
+
 import {TbLetterX} from "react-icons/tb"
 const  EditPost = ({updatedPost,setModal}) =>{
     const {editPostHandler} =usePostsContext()
@@ -59,20 +60,24 @@ return <>
    
     <h4>Edit Post</h4>
     <div className = "form-group">
-       <textarea value = {updatedPostContent} placeholder = "Write down your taughts" name = "content" 
+       <textarea rows = "3"  columns = "50" value = {updatedPostContent} placeholder = "Write down your taughts" name = "content" 
        onChange = {updatePostEventHandler}/>
         </div>
         <div>
       
         {
             updatedPostImage?
-            <div><img  className = "post-image-create-modal"  style = {{height:"100px"
-     , width:"100px", marginLeft:"20px"}}  src = { updatedPostImage} />
-    
-
-     <TbLetterX onClick ={() => setUpdatedPostImage("")} />
+            <div className = "post-image-create-modal" >
+            
+   <span className = "cancel">
+   <TbLetterX size = {10}  onClick ={() => setUpdatedPostImage("")} />
 
    
+   </span>
+            <img      src = { updatedPostImage} />
+            {/* <button className = "cancel"  onClick ={() => setUpdatedPostImage("")}>&times;</button> */}
+    
+  
       </div>
      :
             <div>
@@ -84,7 +89,7 @@ return <>
             </div>
         }
         </div>
-        <button onClick = {EditPostEventHandler} >Save Changes</button>
+        <button onClick = {EditPostEventHandler} >Update</button>
 
     </form>
   
@@ -94,11 +99,3 @@ return <>
  </>
 }
 export default EditPost
-// _id: "d7c8e1b5-8f91-4d10-a68e-1683c8755cc3",
-// content: "Adventures await! 🌄✨",
-// mediaURL:
-//   "https://res.cloudinary.com/dptfwcnro/image/upload/v1685937473/SocialBuzz/istockphoto-1133850671-170667a_g9e3kl.webp",
-// likes: {
-//   likeCount: 7,
-//   likedBy: [],
-//   dislikedBy: [],

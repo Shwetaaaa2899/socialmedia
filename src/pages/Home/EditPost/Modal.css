@@ -1,0 +1,40 @@
+.modal-container{
+    display: flex;
+   
+    justify-content: center;
+}
+
+.form-group > textarea{
+    text-align: center;
+    width:100%;
+    height:20vh;
+}
+.form-group > h4{
+    text-align: center;
+    margin-left:120px;
+}
+.cancel{
+    /* right:100px; */
+    left:230px;
+    position: absolute;
+    background-color: grey;
+    border-radius: 30%;
+
+    cursor: pointer;
+    width:20px;
+    top: 2px;
+    /* margin-left:20px; */
+
+
+
+}
+.post-image-create-modal > img{
+    height:150px;
+     width:150px;
+      margin-left:20px;
+  
+   
+}
+.post-image-create-modal{
+position: relative;
+}

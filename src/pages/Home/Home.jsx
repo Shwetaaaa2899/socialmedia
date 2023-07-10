@@ -7,7 +7,7 @@
 // import { usePostsContext } from "../../context/usercontext"
 import { useState } from "react"
 import { usePostsConext} from "../../context/postcontext"
-import Post from "../Post"
+import Post from "../Posts/Post"
 import { useAuth } from "../../context/authcontext"
 import { useEffect } from "react"
 const Home = () =>{

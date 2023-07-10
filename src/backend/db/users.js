@@ -23,40 +23,25 @@ export const users = [
     "Frontend Developer 💻✨Turning ideas into beautiful and interactive websites✨🚀",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-  //   avatarUrl:
-  //   "https://res.cloudinary.com/dptfwcnro/image/upload/v1685515809/SocialBuzz/photo_pd6e7o.jpg",
-  },
+    avatarUrl:"https://i.pinimg.com/originals/22/04/a8/2204a80672494b512d779aa3fe119744.jpg"
+ },
   {
     _id: 3,
-    firstName: "Chhakuli",
-    lastName: "Zingare",
-    username: "chhakulizingare",
-    password: "chhakuli@123",
-    bio:
-      "Frontend Developer 💻✨Turning ideas into beautiful and interactive websites✨🚀",
+    firstName: "Shweta",
+    lastName: "Jha",
+    username: "shwetaj",
+    password: "shweta@123",
+    bio:"Learning React💻✨ by building projects",
     bookmarks: [],
-    avatarUrl:
-      "https://res.cloudinary.com/dptfwcnro/image/upload/v1685515809/SocialBuzz/photo_pd6e7o.jpg",
-    website: "https://github.com/chhakuli123",
+    website:"https://github.com/Shwetaaaa2899",
+
     createdAt: "2022-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
+    avatarUrl:"https://1fid.com/wp-content/uploads/2022/06/cartoon-profile-picture-6-1024x1024.jpg",
+    
   },
  
-  {
-    _id: 20,
-    firstName: "Chhakuli2",
-    lastName: "Zingare",
-    username: "chhakulizingare",
-    password: "chhakuli@123",
-    bio:
-      "Frontend Developer 💻✨Turning ideas into beautiful and interactive websites✨🚀",
-    bookmarks: [],
-    avatarUrl:
-      "https://res.cloudinary.com/dptfwcnro/image/upload/v1685515809/SocialBuzz/photo_pd6e7o.jpg",
-    website: "https://github.com/chhakuli123",
-    createdAt: "2022-01-01T10:55:06+05:30",
-    updatedAt: formatDate(),
-  },
+  
   {
     _id: 4,
     firstName: "Alice",

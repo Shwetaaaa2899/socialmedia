@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import {usePostsConext} from "../../context/postcontext";
-import Post from "../Post"
+import Post from "../Posts/Post"
 import { useAuth } from "../../context/authcontext";
 const BookMark = () =>{
     const {state:{bookMark,posts},getPosts}= usePostsConext()

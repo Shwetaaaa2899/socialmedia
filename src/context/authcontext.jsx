@@ -12,8 +12,8 @@ import {useUserContext } from "./usercontext";
    
 
     const receivedToken = JSON.parse(localStorage.getItem("loginDetails"))
-    // console.log(receivedToken)
-    // console.log(JSON.parse(receivedToken))
+    // //console.log(receivedToken)
+    // //console.log(JSON.parse(receivedToken))
 
  
     const location = useLocation();
@@ -31,7 +31,7 @@ import {useUserContext } from "./usercontext";
     const[userInfo,setUserInfo] = useState(receivedToken?.user||null);//data current user-profile
     const navigate = useNavigate()
     const [state,dispatch] = useReducer(UserReducer,initialState)
-// console.log("Initial data",isLoggedIn,token,userInfo)
+// //console.log("Initial data",isLoggedIn,token,userInfo)
 
 //   body - {firstName, lastName, username, password}
 const signUpHandler = async({
@@ -61,11 +61,14 @@ try{
     // const response = await sendreq.json();
     const response = await sendreq.json()
     
-  console.log("response for sign up ",response)
+  //console.log("response for sign up ",sendreq)
+   if(sendreq.status === 422){
+    toast("Username already exists")
+  }
     if(sendreq.status  === 201){
 
       
-        console.log("received token from server fr signup",response.encodedToken)
+        //console.log("received token from server fr signup",response.encodedToken)
        
             localStorage.setItem(
               "loginDetails",
@@ -105,11 +108,11 @@ try{
               "User email already exists! Please try signing up with another email!"
             );
           } else {
-            console.error(e);
+            //console.error(e);
             toast.error("Unable to sign up!");
           }
        
-        console.log(e)
+        //console.log(e)
         setAuthError(e)
     }
 
@@ -130,11 +133,11 @@ else{
 //function call  to set token while login
  const loginHandler = async({username, password}) =>{
         
-    //console.log("from logi in form - email is ",username,"pass is",password)
+    ////console.log("from logi in form - email is ",username,"pass is",password)
  
     try{
         const passobj = {username,password}
-    console.log("username and pass is ",username)
+    //console.log("username and pass is ",username)
     const sendreq =await fetch("/api/auth/login",{
         method:"POST",
         headers:{'Accept':'application/json',
@@ -143,7 +146,7 @@ else{
     })
     const response = await sendreq.json();
        
-  console.log("response for log in ",response)
+  //console.log("response for log in ",response)
     
    if(sendreq.status === 200){
 
@@ -156,9 +159,9 @@ else{
         
         // const localStorageResponse = localStorage.getItem("loginDetails") //shows data in string format
         // const localstorgaedataparsed = JSON.parse(localStorageResponse)
-        // console.log("Parsed ls val is",localstorgaedataparsed)// got data back in object form
+        // //console.log("Parsed ls val is",localstorgaedataparsed)// got data back in object form
         // const {user, token } = JSON.parse(localStorageResponse)
-        // console.log("data received token on login is",token,"from context")
+        // //console.log("data received token on login is",token,"from context")
         setToken(response.encodedToken)
         setUserInfo(response.foundUser)
         // setUserInfo(user)
@@ -173,11 +176,11 @@ else{
    }
 }
     catch(e){
-        console.log(e)
+        //console.log(e)
     } 
 
 }
-// // console.log("User's info is",user)
+// // //console.log("User's info is",user)
 const logoutHandler = () =>{
     setToken(null)
     localStorage.removeItem("loginDetails");
@@ -189,15 +192,13 @@ const logoutHandler = () =>{
 
 //function to update the details of users
   /**
- * This handler handles updating user details.
- * send POST Request at /api/users/edit
- * body contains { userData }
+
  * */
 const EditUserInfoHandler = async(userInfo) =>{
-console.log("body received post following ",userInfo)
+//console.log("body received post following ",userInfo)
       try{
     const passobj = {userInfo}
-// console.log("username and pass is ",username)
+// //console.log("username and pass is ",username)
 const sendreq =await fetch("/api/users/edit",{
     method:"POST",
     headers:{'Accept':'application/json',
@@ -207,24 +208,24 @@ authorization:token},
 })
 const response = await sendreq.json();
    
-console.log("response for log in ",response.user,sendreq.status)
+//console.log("response for log in ",response.user,sendreq.status)
 
 if(sendreq.status === 201){
 
-  console.log("inside status of 201 ",response,response,sendreq.status)
+  //console.log("inside status of 201 ",response,response,sendreq.status)
     setUserInfo(response.user)
   
 }
 }
 catch(e){
-    console.log(e)
+    //console.log(e)
 } 
 
 }
 
-// console.log("inside status of 201 ",userInfo)
+// //console.log("inside status of 201 ",userInfo)
 
-const ValuesToBePassed = {isLoggedIn,setisLoggedIn,signUpHandler,loginHandler,token,userInfo,logoutHandler,EditUserInfoHandler}
+const ValuesToBePassed = {isLoggedIn,setisLoggedIn,signUpHandler,loginHandler,token,userInfo,setUserInfo,logoutHandler,EditUserInfoHandler}
    return <AuthProviderkey.Provider value = {ValuesToBePassed} >{children}</AuthProviderkey.Provider>
 
  }

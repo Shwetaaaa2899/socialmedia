@@ -4,14 +4,14 @@ import { toast } from "react-toastify"
 import { useState} from "react"
 import "./Login.css"
 // import "./css/Form.css"
-export default function Login() {
+const Login =  () => {
    const location = useLocation()
    const navigate = useNavigate()
 
-    const { loginHandler,token } = useAuth()
-    const [userInfo,setUserInfo] = useState({username:"",password:""})
+    const { loginHandler,token,userInfo } = useAuth()
+    const [authInfo,setAuthInfo] = useState({username:"",password:""})
     const setUserInfoHandler = (e) =>{
-      setUserInfo({...userInfo,[e.target.name] :e.target.value})
+      setAuthInfo({...authInfo,[e.target.name] :e.target.value})
       }
   const  GuestModeData = {
 username: "adarshbalika",
@@ -21,7 +21,7 @@ password: "adarshBalika123"}
     
     const loginClickHandler = (e) =>{
       e.preventDefault()
-     loginHandler(userInfo)
+     loginHandler(authInfo)
         // navigate("/products")
 
 }
@@ -34,15 +34,16 @@ loginHandler(GuestModeData)
 // navigate("/profile")
 
 }
-    
+    console.log(userInfo)
     return <>
 
 <div className="form-box">
   <h5 className="form-step">Login</h5>
   <form>
-  <div className="field1">   <input  required  type  = "text" name = "username"  onChange = {setUserInfoHandler} placeholder="Name"/>
+  <div className="field1"> 
+    <input   required  type  = "text" name = "username"  onChange = {setUserInfoHandler} placeholder="Your UserName"/>
     
-      <input required  type = "password"   name = "password"  onChange = {setUserInfoHandler}  placeholder="Password" />
+      <input   required  type = "password"   name = "password"  onChange = {setUserInfoHandler}  placeholder="Password" />
     
     </div>
 
@@ -56,3 +57,4 @@ loginHandler(GuestModeData)
  
     </>
 }
+export default Login;

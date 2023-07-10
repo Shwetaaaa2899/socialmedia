@@ -1,72 +1,65 @@
 import {useUserContext } from "../../context/usercontext";
-import {useAuth} from "../../context/authcontext"
+// import {useUserContext} from "../../context/usercontext"
 import { useState,useEffect} from "react"
 import { useNavigate } from "react-router-dom"
 import { RxAvatar} from "react-icons/rx"
-import ProfileForm from "./ProfileForm"
-// import ProfileForm from "./ProfileForm"
+import EditProfile from "./EditProfileModal/EditProfile"
+
 
 const Profile = () =>{
    
-        const {token,userInfo} = useAuth()
-       const [profile,setProfile] = useState()
+        const {state:{profile}} = useUserContext()
+        console.log(profile)
+       const [userProfile,setUserProfile] = useState(profile.user)
+// console.log(profile.user,"uyg",userProfile)
        const [modal,setModal] = useState(false)
-      //  const { state:{profile}} = useUserContext()
+     const showOpen = () => setModal(true)
+     const showClose  = () => setModal(false)
        console.log(profile)
 const navigate = useNavigate()
         useEffect(()=>{
-         if(userInfo){
-
       
-          const {firstName,lastName,following,followers,username,avatarUrl} =userInfo;
-          setProfile({firstName,lastName,following,followers,username,avatarUrl})
-         }
-         else{
-          navigate("/login")
-         }
+
+     
+          setUserProfile(profile.user)
+       
          
-        },[userInfo])
+        },[])
         
    
     return <>
  
-  {
-    profile &&
     <div>
     <h1>Profile:-</h1>
-    <div>
-                 <span>
-                  {/* My image:<input type="image/png" label = "Upload your image here"  /> */}
-                 </span>   
-                  
-                </div>
+    
                
-                {/* <button >
-                        Upload!
-                    </button> */} 
+    <div className ="" >
 
-                      {profile.avatarUrl?     <img src = {profile.avatarUrl} />
-                      :
-                      <RxAvatar/>
-                      }
+{profile?.avatarUrl?  
+   <img style ={{width:"50px",height:"50px",borderRadius:"50%" ,objectFit:"cover"}} src = {userProfile?.avatarUrl} />
+:
+<RxAvatar/>
+}
+</div>
+
                 
               
                
- <p><label>Name:</label>{profile.firstName} {profile.lastName}</p>
-   <p><label>UserName:</label>{profile.username}</p>
-   <p><label>Following:</label>{profile.following.length }</p>
-    <p><label>Follower:</label>{profile.followers.length }</p> 
-       <button onClick = {() => setModal(!modal)}  >Edit Profile</button> 
+ <p><label>Name:</label>{userProfile?.firstName} {userProfile?.lastName}</p>
+   <p><label>UserName:</label>{userProfile?.username}</p>
+   <p><label>Following:</label>{userProfile?.following?.length }</p>
+    <p><label>Follower:</label>{userProfile?.followers?.length }</p> 
+       <button onClick = {showOpen}  >Edit Profile</button> 
 
 
 
     </div>
 
-  }
+  
      
   {
    
-    modal &&  < ProfileForm setModal = {setModal } profile = {profile} setProfile = {setProfile} />
+    modal &&  < EditProfile showClose = {showClose} profile = {userProfile} setProfile = {setUserProfile} />
 
   }
 

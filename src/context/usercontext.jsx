@@ -8,19 +8,58 @@ import {useAuth} from "../context/authcontext"
 
 export const UserProvider = ({children}) =>{
 const [state,dispatch] = useReducer(UserReducer,initialState)
-const {token,isLoggedIn,userInfo,EditUserInfoHandler} = useAuth()
-// console.log("got token from context",token)
+const {token,isLoggedIn,setUserInfo,userInfo,EditUserInfoHandler} = useAuth()
+// //console.log("got token from context",token)
 const[users,setUsers] = useState([])
 // logic to update exting localstorage
 
+
 const updateProfile = (updatedData) => {
+    console.log("receved profile in 1st ",updatedData)
     const profile = {
         ...JSON.parse(localStorage.getItem('loginDetails')),
         user:updatedData
     };
-    console.log("data came for updating is",updatedData)
-    localStorage.setItem('loginDetails', JSON.stringify(profile));
-    dispatch({type:"SET-PROFILE",payload:profile})
+    setUserInfo(updatedData)
+    console.log("onfo chnged",userInfo.following)
+  localStorage.setItem('loginDetails', JSON.stringify(profile));
+//   console.log("data came for updating is",JSON.parse(localStorage.getItem('loginDetails')))
+    editUserHandler(updatedData)
+   
+//     dispatch({type:"SET-PROFILE",payload:updatedData})
+//    
+    
+    // dispatch({type:"GET-PROFILE-BASED-POSTS",payload:posts})
+
+}
+//edit user info
+const editUserHandler = async(updatedData) =>{
+    try{
+        // console.log("came in 2nd block", updatedData)
+        const dataToBePassed = {userData:updatedData}
+        const request = await fetch("/api/users/edit",{
+            method:"POST",
+            headers:{'Accept':'application/json',
+        'Content-Type':'application/json',
+    authorization:token  },
+    body:JSON.stringify(dataToBePassed)
+
+        })
+     
+        if(request.status === 201 || request.status === 200){
+            const response = await request.json()
+          
+           dispatch({type:"SET-UPDATED-USER",payload:response.user})
+           dispatch({type:"GET-PROFILE-INFO",payload:response.user})
+        
+    }
+       
+        }
+      
+    
+    catch(e){
+
+    }
 }
 //get all users 
 const getAllUSers = async() =>{
@@ -31,13 +70,12 @@ const getAllUSers = async() =>{
     }
     catch(e){
 
-        console.log(e)
+        //console.log(e)
     }
 }
 useEffect(()=>{  
-    getAllUSers();
+    token &&  getAllUSers();
    },[])
-
 
    //to follow the specific user -  /api/users/follow/:followUserId
    const FollowUser = async(id) =>{
@@ -49,11 +87,11 @@ useEffect(()=>{
     authorization:token  
 }
         })
-      
+      console.log(sendreq)
         if(sendreq.status === 200){
             const{ user,followUser:{firstName,lastName}} = await sendreq.json();
             EditUserInfoHandler(user)
-            // console.log(" flowing user",response.user,response.followUser)
+            // //console.log(" flowing user",response.user,response.followUser)
             // response.followUser -- contains currently followed user info
             toast(`You started follwing  ${firstName} ${lastName}`) 
             updateProfile(user)
@@ -61,15 +99,16 @@ useEffect(()=>{
              
            
         }
+      
         else if(sendreq.status !== 200){
-            console.log("follow status is",sendreq)
+            //console.log("follow status is",sendreq)
 toast("User Already following") //400 case
         }
         
     
     }
         catch(e){
-            console.log("error",e.status)
+            //console.log("error",e.status)
         } 
     
     
@@ -84,11 +123,11 @@ const UnFollowUser = async(id) =>{
 
     
         
-        console.log("from user context id",id)
+        //console.log("from user context id",id)
      
         try{
             
-            // console.log("username and pass is ",token,id)
+            // //console.log("username and pass is ",token,id)
             const sendreq =await fetch(`/api/users/unfollow/${id}/`,{
                 method:"POST",
                 headers:{'Accept':'application/json',
@@ -105,12 +144,12 @@ const UnFollowUser = async(id) =>{
     // }
     //         })
 
-            console.log("unollow status is",sendreq)
+            //console.log("unollow status is",sendreq)
             if(sendreq.status === 200){
                 // const response = await sendreq.json();
                 const{ user,followUser:{firstName,lastName}} = await sendreq.json();
                 EditUserInfoHandler(user)
-                console.log(" flowing user",user)
+                //console.log(" flowing user",user)
                 // response.followUser -- contains currently followed user info
                 toast(`You have unfollowed  ${firstName} ${lastName}`) 
                 updateProfile(user)
@@ -120,7 +159,7 @@ const UnFollowUser = async(id) =>{
                
             }
             else if(sendreq.status !== 200){
-                console.log("follow status is",sendreq)
+                //console.log("follow status is",sendreq)
     toast("User already not following") //400 case
             }
             
@@ -128,7 +167,7 @@ const UnFollowUser = async(id) =>{
         
         }
             catch(e){
-                console.log(e)
+                //console.log(e)
             } 
         
 
@@ -139,28 +178,51 @@ const UnFollowUser = async(id) =>{
  * send GET Request at /api/users/:userId
  * */
 
- const getUserHandler =  async(userId)  => {
+ const getUserHandler =  async(user)  => {
+
+    const id = user?._id
+
+  
     try{
-        const response = await fetch(`api/users/${userId}`)
-        if(response.status === 200){
+       
+        const response = await fetch(`/api/users/${id}`)
+        
+        if(response.status === 200 || response.status === 201 ){
             const finalResponse = await response.json()
-            console.log("for calling based on id",finalResponse)
+           // console.log("api resp is",finalResponse)
+       dispatch({type:"GET-PROFILE-INFO",payload:finalResponse.user})
         }
     }
     catch(e){
+        console.log("error in getuserhandler")
 
     }
  }
 
+    //2.quest at  /api/posts/user/:username
+    const getAllUserPostsHandler = async(username) =>{
+        try{
+          const response = await fetch(`/api/posts/user/${username}`)
+        //   //console.log("post id is",response)
+          if(response.status === 200){
+            // //console.log(200)
+            const {posts} = await response.json()
+        
+            dispatch({type:"GET-PROFILE-BASED-POSTS",payload:posts})
+      
+          }
+      
+        }
+        catch(e){}
+      
+        }
 
- const getUserInfoByUserName = (username) => {
+      
 
-    return  state.users.find((user) => user.username === username)
-  
-     }
+ 
 const isFollowing =(followedUser)=> { 
   const resp =  userInfo?.following?.some((user) => Number(user._id ) === Number(followedUser._id))
-//   console.log(userInfo?.following,followedUser,resp)
+//   //console.log(userInfo?.following,followedUser,resp)
   return resp
 //     return state?.profile.following.some(
 //     (currUser) => currUser._id ===id
@@ -169,7 +231,11 @@ const isFollowing =(followedUser)=> {
 
  }
 
-    const ValuesToBePassed = {state,FollowUser,getUserInfoByUserName,UnFollowUser,updateProfile,dispatch,getUserHandler,isFollowing}
+    const ValuesToBePassed = {state,
+        FollowUser,UnFollowUser,updateProfile,
+        dispatch,getUserHandler,getAllUserPostsHandler,
+   editUserHandler
+   ,isFollowing}
     return <UserProviderKey.Provider value = {ValuesToBePassed}>{children}</UserProviderKey.Provider>
 }
 // export default UserProvider;
