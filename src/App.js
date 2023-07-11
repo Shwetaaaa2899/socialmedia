@@ -30,7 +30,7 @@ function App() {
         toastOptions={{ style: { maxWidth: 500 } }}
       />
 <Header />
-<LeftBar />
+{/* <LeftBar /> */}
 
   <Routes>
     <Route path = "/mock" element={<Mockman />} />
@@ -45,7 +45,7 @@ function App() {
 </Routes>
 
   <Routes> */}
-  {/* <Route  element={<RequiresAuth><LeftBar /> </RequiresAuth>} > */}
+  <Route  element={<RequiresAuth><LeftBar /> </RequiresAuth>} >
   <Route path = "/" element={<RequiresAuth><Feed /></RequiresAuth>} />
 {/* <Route path = "/feed" element={<Feed />} /> */}
 <Route path = "/users" element={<RequiresAuth><Users /></RequiresAuth>} />
@@ -55,6 +55,7 @@ function App() {
 
 <Route path = "/explore" element={<RequiresAuth><Explore /></RequiresAuth>} />
 {/* <Route path = "/profile" element={<UserProfile />} /> */}
+</Route>
 
 
   </Routes>

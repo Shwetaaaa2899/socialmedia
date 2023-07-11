@@ -7,9 +7,9 @@ const Users = () =>{
     const {token,isLoggedIn,userInfo} = useAuth()
     const {state :{users},FollowUser,UnFollowUser,isFollowing,getAllUSers} = useUserContext()
     const [input,setInput] = useState("")
-    const userTobeShown = users.filter((user) => user?.username !== userInfo?.username)
+    let userTobeShown = users.filter((user) => user?.username !== userInfo?.username)
    
-    const [showusers,setUsers] = useState(userTobeShown)
+    //const [showusers,setUsers] = useState(userTobeShown)
     const FollowingHandler = (id,follow) =>{
       console.log("click")
         if(follow){
@@ -28,12 +28,16 @@ const inputChangeHandler = (e) =>{
 }
 
 
- useEffect(()=>{
-    const filteredUsers =  input.length>0?showusers?.filter((user)=> user?.firstName?.toLowerCase().includes(input.toLowerCase()))
-    :userTobeShown
+//  useEffect(()=>{
+    if(input.length>0){
+          userTobeShown = userTobeShown?.filter((user)=> user?.firstName?.toLowerCase().includes(input.toLowerCase()))
+  
 
-    setUsers(filteredUsers)
- },[input])
+    }
+   
+
+   // setUsers(filteredUsers)
+//  },[input])
     return <>
 
 <div className = "user-container">
@@ -47,7 +51,7 @@ Whom to Follow?
 {
 
   
-    showusers?.map((user) =>
+    userTobeShown?.map((user) =>
     <div className = "user" key = {user._id}> 
     <div className = "image">
 
