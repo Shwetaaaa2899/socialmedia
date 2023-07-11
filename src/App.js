@@ -10,7 +10,8 @@ import MainContainer from "./pages/Home/MainContainer"
 import Users from "./pages/Home/User/Users"
 import  Profile from "./pages/Home/Profile"
 import  Explore from "./pages/Home/Explore"
-import UserProfile from "./pages/UserProfile/UserProfile"
+//import UserProfile from "./pages/UserProfile/UserProfile"
+import UserProfile from './pages/UserProfile/UserProfile';
 import BookMark from './pages/Home/BookMark';
 import  Feed from "./pages/Home/Feed/Feed"
 import  LikedPost from "./pages/Home/LikedPost"
@@ -29,6 +30,7 @@ function App() {
         toastOptions={{ style: { maxWidth: 500 } }}
       />
 <Header />
+<LeftBar />
 
   <Routes>
     <Route path = "/mock" element={<Mockman />} />
@@ -39,21 +41,21 @@ function App() {
 <Route path = "/signup" element={<SignUp />} />
 <Route path = "/logout"  />
 
-
+{/* 
 </Routes>
 
-  <Routes>
-  <Route  element={<RequiresAuth><LeftBar /> </RequiresAuth>} >
-  <Route path = "/" element={<Feed />} />
+  <Routes> */}
+  {/* <Route  element={<RequiresAuth><LeftBar /> </RequiresAuth>} > */}
+  <Route path = "/" element={<RequiresAuth><Feed /></RequiresAuth>} />
 {/* <Route path = "/feed" element={<Feed />} /> */}
-<Route path = "/users" element={<Users />} />
-<Route path = "/liked" element={<LikedPost />} />
-<Route path = "/bookmark" element={<BookMark />} /> 
-<Route path = "/posts/user/:username" element = {<UserProfile />} />
+<Route path = "/users" element={<RequiresAuth><Users /></RequiresAuth>} />
+<Route path = "/liked" element={<RequiresAuth><LikedPost /></RequiresAuth>} />
+<Route path = "/bookmark" element={<RequiresAuth><BookMark /></RequiresAuth>} /> 
+<Route path = "/posts/user/:username" element = {<RequiresAuth><UserProfile /></RequiresAuth>} />
 
-<Route path = "explore" element={<Explore />} />
+<Route path = "/explore" element={<RequiresAuth><Explore /></RequiresAuth>} />
 {/* <Route path = "/profile" element={<UserProfile />} /> */}
-</Route>
+
 
   </Routes>
 

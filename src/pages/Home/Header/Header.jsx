@@ -22,13 +22,14 @@ import CreatePost from "../CreatePostModal/Modal"
   
  
  <div className = "items-container">
-  <div className = "item" ><Link   target="_blank" to ="https://github.com/Shwetaaaa2899"><AiFillGithub/></Link></div>
+  <div className = "item" >
+  <Link   target="_blank" to ="https://github.com/Shwetaaaa2899"><AiFillGithub/></Link></div>
   {/* <div className = "item" onClick = {() => console.log("clicked")}> <NavLink to ="/mock">
   mock</NavLink> </div> */}
   {/* <div className = "item"> <NavLink to ="/login">Login</NavLink></div> */}
   {/* <div className = "item"> <NavLink to ="/signup">SignUp</NavLink></div> */}
   <div className = "item"> 
-  {userInfo.firstName}
+  { isLoggedIn && token && userInfo?.firstName}
   </div>
   <div  className = "item" onClick = {logoutHandler}>
  {

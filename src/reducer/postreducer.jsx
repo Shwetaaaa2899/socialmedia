@@ -54,7 +54,7 @@ const PostReducer = (state, action) => {
                         likedPosts: likedPostsFiltered
                     }
         case "GET-FEEDS":
-
+  console.log(action.payload)
             return {
                 ...state,
                 feed: action.payload
@@ -98,7 +98,7 @@ export const initialState = {
     isloading: true,
     posts: [],
    
-    explore: [],
+   // explore: [],
     editPost: {},
     feed: [],
     sorting: "",

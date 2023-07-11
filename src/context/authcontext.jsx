@@ -184,7 +184,9 @@ else{
 const logoutHandler = () =>{
     setToken(null)
     localStorage.removeItem("loginDetails");
+    // {token:,user:userinfo}
     setisLoggedIn(false)
+    setUserInfo(null)
     toast("Logged out successfully!")
     navigate("/")
 
