@@ -69,13 +69,11 @@ export const UserProvider = ({ children }) => {
       //console.log(e)
     }
   };
-  useEffect(() => {
-    token && getAllUSers();
-  }, []);
 
   //to follow the specific user -  /api/users/follow/:followUserId
   const FollowUser = async (id) => {
     try {
+      console.log("hey", id);
       const sendreq = await fetch(`/api/users/follow/${id}`, {
         method: "POST",
         headers: {
@@ -86,16 +84,17 @@ export const UserProvider = ({ children }) => {
       });
       console.log(sendreq);
       if (sendreq.status === 200) {
-        const {
-          user,
-          followUser: { firstName, lastName },
-        } = await sendreq.json();
-        EditUserInfoHandler(user);
-        // //console.log(" flowing user",response.user,response.followUser)
-        // response.followUser -- contains currently followed user info
-        toast(`You started follwing  ${firstName} ${lastName}`);
-        updateProfile(user);
-        dispatch({ type: "FOLLOW-A-USER", payload: user });
+        // const {
+        //   user,
+        //   followUser: { firstName, lastName },
+        // } = await sendreq.json();
+        const response = await sendreq.json();
+        setUserInfo(response.user);
+        toast(
+          `You started follwing  ${response.followUser.firstName} ${response.followUser.lastName}`
+        );
+        dispatch({ type: "SET-UPDATED-USER", payload: response.user });
+        dispatch({ type: "FOLLOW-A-USER", payload: response.user });
       } else if (sendreq.status !== 200) {
         //console.log("follow status is",sendreq)
         toast("User Already following"); //400 case
@@ -122,35 +121,22 @@ export const UserProvider = ({ children }) => {
           authorization: token,
         },
       });
-
-      //         const sendreq =await fetch(`/api/users/follow/${id}`,{
-      //             method:"POST",
-      //             headers:{'Accept':'application/json',
-      //         'Content-Type':'application/json',
-      //     authorization:token
-      // }
-      //         })
-
-      //console.log("unollow status is",sendreq)
       if (sendreq.status === 200) {
-        // const response = await sendreq.json();
-        const {
-          user,
-          followUser: { firstName, lastName },
-        } = await sendreq.json();
-        EditUserInfoHandler(user);
-        //console.log(" flowing user",user)
-        // response.followUser -- contains currently followed user info
-        toast(`You have unfollowed  ${firstName} ${lastName}`);
-        updateProfile(user);
-        // UNFOLLOW-A-USER
-        dispatch({ type: "UNFOLLOW-A-USER", payload: user });
+        const response = await sendreq.json();
+        setUserInfo(response.user);
+        console.log("un  flowing user", response.followUser);
+        updateProfile(response.user);
+        toast(
+          `You have unfollowed  ${response.followUser.firstName} ${response.followUser.lastName}`
+        );
+
+        dispatch({ type: "SET-UPDATED-USER", payload: response.user });
+        dispatch({ type: "UNFOLLOW-A-USER", payload: response.user });
       } else if (sendreq.status !== 200) {
-        //console.log("follow status is",sendreq)
         toast("User already not following"); //400 case
       }
     } catch (e) {
-      //console.log(e)
+      console.log(e);
     }
   };
 
@@ -210,6 +196,7 @@ export const UserProvider = ({ children }) => {
     getAllUserPostsHandler,
     editUserHandler,
     isFollowing,
+    getAllUSers,
   };
   return (
     <UserProviderKey.Provider value={ValuesToBePassed}>

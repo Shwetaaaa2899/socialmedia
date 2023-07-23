@@ -1,0 +1,83 @@
+/* //edit profile - css */
+.modal-container {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  /* font-size: 5px; */
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* position: relative; */
+  /* display: inline-block; */
+}
+
+.input {
+  /* background-color: aqua; */
+  font-size: 3px;
+}
+h4 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.modal {
+  border-radius: 5px;
+  padding: 2rem;
+  background-color: white;
+  width: 25em;
+  position: relative;
+}
+.modal .btn {
+  display: block;
+  margin: auto;
+  /* //to get it in center hrizontally */
+}
+.modal-wrapper {
+  position: fixed;
+  background-color: antiquewhite;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  color: black;
+  background-color: cadetblue;
+}
+.post-image-create-modal {
+  position: relative;
+}
+.cancel {
+  /* left: 230px; */
+  position: absolute;
+
+  right: 85px;
+
+  background-color: lightgray;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.btn-modal {
+  width: 80px;
+  height: 40px;
+  /* display: flex; */
+  background-color: gray;
+  outline: black;
+  font-size: 10px;
+  margin: 5px;
+  /* color: aliceblue; */
+}

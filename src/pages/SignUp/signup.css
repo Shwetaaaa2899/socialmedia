@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+/* .header-login {
+  /* margin: 10px; */
+/* } * */
+/* .form-login {
+  background-color: aqua;
+  width: 400px;
+  height: 400px;
+} */
 .form-login {
   margin: 5rem;
 }
@@ -18,7 +26,7 @@
   /* align-items: center; */
 }
 input {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   margin-left: 2rem;
 }
 
@@ -40,6 +48,7 @@ input {
 .submitBtn {
   width: 5rem;
   margin-left: 1rem;
+  height: 2rem;
 }
 .header-login {
   margin: 2rem;
@@ -55,4 +64,30 @@ input {
 }
 .login-confirmation span:hover {
   font-weight: 25px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+.password-input {
+  width: 200px;
+  /* background-color: aqua; */
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+
+.password-input input {
+  width: 200px;
+  /* background-color: transparent; */
+}
+
+.password-input span {
+  right: 0;
+  /* right: 10px; */
+  position: absolute;
+  top: 5px;
+  color: black;
+  padding-right: 10px;
 }

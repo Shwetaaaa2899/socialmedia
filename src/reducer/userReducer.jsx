@@ -9,7 +9,7 @@ export const UserReducer = (state, action) => {
     case "GET-POSTS":
       return { ...state, ProfileToBeShown: action.payload };
     case "FOLLOW-A-USER":
-      console.log("follow - user is", action.payload);
+      // console.log("follow - user is", action.payload);
       return { ...state, profile: action.payload };
     case "FILL-USER-DETAILS":
       console.log(
@@ -22,15 +22,15 @@ export const UserReducer = (state, action) => {
         following: action.payload.following,
       };
     case "SET-UPDATED-USER":
-      // console.log("updated users are",action.payload  )
+      // console.log("updat/ed users are", action.payload);
       const updatedUsers = state?.users?.map((user) =>
         user._id === action.payload?._id ? { ...action.payload } : user
       );
-      // console.log("updated users are",updatedUsers  )
+
       return { ...state, users: updatedUsers };
 
     case "UNFOLLOW-A-USER":
-    //   console.log("unfollow - user ius", action.payload);
+      console.log("unfollow - user ius", action.payload);
       return { ...state, profile: action.payload };
     case "GET-PROFILE-BASED-POSTS":
       // console.log("profile vbased posts", action.payload)
