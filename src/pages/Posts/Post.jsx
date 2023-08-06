@@ -53,6 +53,12 @@ const Post = ({ post }) => {
   const showOptions = () => {
     console.log();
   };
+  const date = new Date(post.createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  console.log(date);
 
   useEffect(() => {
     const finalResponse = users?.find(
@@ -70,7 +76,7 @@ const Post = ({ post }) => {
         {/* <div onClick = {() => navigate(`/posts/user/${post?.username}`)} > */}
         <div
           className="User-profile-picture"
-          onClick={() => navigate(`/posts/user/${post?.username}`)}
+          onClick={() => navigate(`/posts/user/${userprofileData?._id}`)}
         >
           {userprofileData?.avatarUrl ? (
             <img src={userprofileData?.avatarUrl} />
@@ -79,8 +85,8 @@ const Post = ({ post }) => {
           )}
         </div>
         <div
-          className="user-name"
-          onClick={() => navigate(`/posts/user/${post?.username}`)}
+          className="user-details-info"
+          onClick={() => navigate(`/posts/user/${userprofileData?._id}`)}
         >
           <h4>
             {userprofileData?.firstName} {userprofileData?.lastName}
@@ -88,12 +94,7 @@ const Post = ({ post }) => {
 
           <small onClick={() => navigate(`/posts/user/${post?.username}`)}>
             {" "}
-            {post.username} -{" "}
-            {new Date(post.createdAt).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })}
+            {post.username} &nbsp;<span>{date}</span>
           </small>
         </div>
 

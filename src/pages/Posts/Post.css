@@ -141,3 +141,7 @@ li {
   padding: 5px;
   margin: 2px;
 }
+
+.user-details-info:hover{
+  cursor: pointer;
+}

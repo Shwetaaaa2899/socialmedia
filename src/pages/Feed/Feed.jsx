@@ -23,7 +23,7 @@ const Feed = () => {
     state,
   } = useUserContext();
   const userInfo = JSON.parse(localStorage.getItem("loginDetails"));
-  const [type, setType] = useState("");
+  const [type, setType] = useState("trending");
   //  const[feed,setFeed] = useState(state.posts)  const { userInfo }= useAuth()
   useEffect(() => {
     getFeeds();
@@ -42,10 +42,16 @@ const Feed = () => {
   return (
     <div className="feed">
       <div className="filter">
-        <div className="filter-item-1" onClick={() => setType("trending")}>
+        <div
+          className={type === "trending" ? "child-active" : "child"}
+          onClick={() => setType("trending")}
+        >
           Trending
         </div>
-        <div className="filter-item-2" onClick={() => setType("latest")}>
+        <div
+          className={type === "latest" ? "child-active" : "child"}
+          onClick={() => setType("latest")}
+        >
           Latest
         </div>
       </div>

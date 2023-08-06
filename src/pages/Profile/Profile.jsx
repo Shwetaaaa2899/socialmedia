@@ -10,7 +10,7 @@ const Profile = () => {
     state: { profile },
   } = useUserContext();
   console.log(profile);
-  const [userProfile, setUserProfile] = useState(profile.user);
+  const userProfile = profile.user;
   // console.log(profile.user,"uyg",userProfile)
   const [modal, setModal] = useState(false);
   const showOpen = () => setModal(true);
@@ -44,11 +44,12 @@ const Profile = () => {
 
         <p>
           <label>Name:</label>
-          {userProfile?.firstName} {userProfile?.lastName}
+          {userProfile?.firstName}
+          {userProfile?.lastName}
         </p>
         <p>
           <label>Website:</label>
-          {userProfile?.website}
+          {userProfile?.website ? userProfile?.website : "No website available"}
         </p>
         <p>
           <label>UserName:</label>

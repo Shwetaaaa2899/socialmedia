@@ -49,7 +49,7 @@ const EditProfile = ({ showClose, profile }) => {
   };
   const ImageInputHandler = (e) => {
     // console.log("Img changes ",e.target.files[0])
-    updatedAvatarImage(URL.createObjectURL(e.target.files[0]));
+    setUpdatedAvatarImage(URL.createObjectURL(e.target.files[0]));
 
     setEdittedUserProfile({
       ...edittedUserProfile,

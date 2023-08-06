@@ -1,38 +1,84 @@
-.user-individual-container {
-  height: 100vh;
-}
-span {
-  font-size: 15px;
-}
-button {
-  border-radius: 10px;
-}
-.user-container {
-  /* padding:10px 15px; */
-  border: 2px solid transparent;
-  box-shadow: 0px 0px 7px gray;
-  border-radius: 10px;
+.users-container-wrapper {
   display: flex;
-  height: 50px;
-  width: 100%;
-  /* position: fixed; */
-  /* top: 70px; */
-}
-input {
-  height: 25px;
-  /* width:200px; */
-  /* padding:100px ; */
-  text-align: center;
-  box-shadow: 0px 0px 7px gray;
-}
-.image > img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  align-items: flex-start;
-  margin-left: -1px;
+  /* background-color: orange; */
+  /* flex-wrap: wrap; */
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: 2rem;
+  /* right: 0; */
+  /* justify-content: space-between; */
 }
 
-span {
-  font-size: 15px;
+.user-individual-container {
+  width: 270px;
+  height: 3.5rem;
+  /* text-align: center; */
+  box-shadow: 0px 0px 7px gray;
+}
+
+.users-container-div {
+  position: fixed;
+  margin-top: 100px;
+  top: 0;
+  right: 0;
+}
+
+.user-individual-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* background-color: orange; */
+
+  /* flex-direction: column; */
+  /* gap: 1rem; */
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+}
+
+.image img {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* margin: 0; */
+  /* padding: 0; */
+  border-radius: 50%;
+  /* align-self: flex-start; */
+}
+
+.user-individual-container .image {
+  flex-basis: 10%;
+  background-color: transparent;
+  outline: 0;
+}
+
+.user-individual-container .user-info {
+  align-self: flex-start;
+  flex-basis: 70%;
+  margin-left: 20px;
+}
+
+.user-individual-container .user-info .name {
+  font-weight: 600;
+
+  font-size: medium;
+}
+
+.user-individual-container .follow-btn {
+  align-self: flex-start;
+  flex-basis: 20%;
+  margin: 2px;
+  /* flex */
+}
+
+.user-individual-container .follow-btn button {
+  width: 100px;
+  padding: 1px;
+  margin: 2px;
+}
+
+.user-individual-container .follow-btn button:hover,
+.user-individual-container .user-info:hover {
+  cursor: pointer;
 }

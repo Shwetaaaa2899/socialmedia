@@ -87,7 +87,7 @@ export const UserProvider = ({ children }) => {
         // const {
         //   user,
         //   followUser: { firstName, lastName },
-        // } = await sendreq.json();
+        // } = await sendreq. json();
         const response = await sendreq.json();
         setUserInfo(response.user);
         toast(

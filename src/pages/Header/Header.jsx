@@ -29,8 +29,14 @@ const Header = () => {
         <div className="logo">Logo</div>
         <ul className="nav-right">
           <li className="item username">
-            <h5> {isLoggedIn && token && userInfo?.firstName}</h5>
+            <h4>
+              Hi
+              <span> {isLoggedIn && token && userInfo?.firstName}</span>
+            </h4>
           </li>
+
+          {/* <h4>Hello! <span className='navbar_username' onClick={()=>navigate(`/userprofile/${authState?.user?.username}`)}>{authState?.user?.firstName} {authState?.user?.lastName}</span></h4> */}
+
           <li className="item">
             <Link target="_blank" to="https://github.com/Shwetaaaa2899">
               <AiFillGithub />

@@ -17,7 +17,7 @@ import { useAuth } from "../../context/authcontext";
 export const LeftBar = ({ children }) => {
   const [modal, setModal] = useState(false);
   const { userInfo } = useAuth();
-  //consolelog("userinfo from leftbar ",userInfo)
+  // consolelog("userinfo from leftbar ",userInfo)
   const routes = [
     { name: "Feed", path: "/", icon: <AiOutlineHome /> },
     { name: "Explore", path: "/explore", icon: <AiOutlineRocket /> },
@@ -27,7 +27,7 @@ export const LeftBar = ({ children }) => {
 
     {
       name: "Profile",
-      path: `/posts/user/${userInfo?.username}`,
+      path: `/posts/user/${userInfo?._id}`,
       icon: <CgProfile />,
     },
   ];
@@ -38,7 +38,7 @@ export const LeftBar = ({ children }) => {
   };
   const showOpen = () => {
     setModal(true);
-    console.log("clicked");
+    // console.log("clicked");
   };
 
   const [activeId, setActiveId] = useState("Feed");
@@ -93,7 +93,9 @@ export const LeftBar = ({ children }) => {
         {modal && <CreatePost showClose={showClose} showOpen={showOpen} />}
 
         <div className="right-sidebar">
-          <Users />
+          <div className="right-section">
+            <Users />
+          </div>
         </div>
       </div>
     </div>

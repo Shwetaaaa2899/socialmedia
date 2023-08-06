@@ -1,6 +1,7 @@
 import { useUserContext } from "../../context/usercontext";
 import { useAuth } from "../../context/authcontext";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // import {useEffect} from "react-router-dom"
 import "./User.css";
 const Users = () => {
@@ -16,6 +17,7 @@ const Users = () => {
   let userTobeShown = users.filter(
     (user) => user?.username !== userInfo?.username
   );
+  const navigate = useNavigate();
 
   //const [showusers,setUsers] = useState(userTobeShown)
   const FollowingHandler = (id, follow) => {
@@ -45,7 +47,7 @@ const Users = () => {
   }, []);
   return (
     <>
-      <div className="user-individual-container">
+      <div className="users-container-div">
         <div>
           <input
             type="text"
@@ -54,28 +56,35 @@ const Users = () => {
           />
           <h3>Whom to Follow?</h3>
         </div>
-        <div className="users-list"></div>
-        {userTobeShown?.map((user) => (
-          <div className="user-container" key={user._id}>
-            <div className="image">
-              <img src={user?.avatarUrl} alt="no image present" />
+        <div className="users-container-wrapper">
+          {userTobeShown?.map((user) => (
+            <div className="user-individual-container">
+              <div className="image">
+                <img src={user.avatarUrl} alt="avatar" />
+              </div>
+              <div
+                className="user-info"
+                onClick={() => navigate(`/posts/user/${user?._id}`)}
+              >
+                <p className="name">
+                  {user.firstName} {user.lastName}
+                </p>
+                <small>{user.username}</small>
+              </div>
+              <div className="follow-btn">
+                <button
+                  onClick={() =>
+                    isFollowing(user)
+                      ? FollowingHandler(user._id, false)
+                      : FollowingHandler(user._id, true)
+                  }
+                >
+                  <span>{isFollowing(user) ? "Following" : "Follow"}</span>
+                </button>
+              </div>
             </div>
-            <h4>
-              {user.firstName}-{user.lastName}
-            </h4>
-            <small>{user.username}</small>
-            <button
-              className="btn"
-              onClick={() =>
-                isFollowing(user)
-                  ? FollowingHandler(user._id, false)
-                  : FollowingHandler(user._id, true)
-              }
-            >
-              <span>{isFollowing(user) ? "Following" : "Follow"}</span>
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );

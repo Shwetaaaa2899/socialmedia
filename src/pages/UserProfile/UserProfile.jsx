@@ -4,44 +4,36 @@ import { RxAvatar } from "react-icons/rx";
 import { useUserContext } from "../../context/usercontext";
 import { usePostsConext } from "../../context/postcontext";
 import Post from "../Posts/Post";
+import { BiLinkAlt } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import "./UserProfile.css";
 // import{dum} from "../../../src/instagram.png";
 import EditProfile from "../EditProfileModal/EditProfile";
 import { useAuth } from "../../context/authcontext";
+// import { usePostsConext } from "../../context/postcontext";
 const UserProfile = () => {
   const { username } = useParams();
-  // console.log("hey user",username)
+  console.log("hey user", username);
   const [modal, setModal] = useState(false);
   const { userInfo } = useAuth();
   const {
-    state: { profileBasedPosts, profile, users },
-    state,
-    getUserHandler,
-    editUserHandler,
-    getAllUserPostsHandler,
+    state: { profile, users },
   } = useUserContext();
-  const [loading, setLoading] = useState(true);
+  const {
+    state: { posts },
+  } = usePostsConext();
+
+  const tempProfile = users.find((user) => user._id === parseInt(username));
+  const tempPosts = posts.filter(
+    (post) => post.username === tempProfile.username
+  );
+  // console.log("temp profile is", tempPosts, tempProfile, users, username);
+  const [loading, setLoading] = useState(false);
 
   const showOpen = () => setModal(true);
 
   const showClose = () => setModal(false);
 
-  const getUserSpecificdata = (username) => {
-    const user = users?.find((user) => user.username === username);
-
-    user && getUserHandler(user);
-    getAllUserPostsHandler(username);
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    if (username === userInfo.username) {
-      editUserHandler(userInfo);
-    }
-    username && getUserSpecificdata(username);
-    setLoading(false);
-  }, [username, state]);
   //  console.log(profile)
   return (
     <>
@@ -51,41 +43,47 @@ const UserProfile = () => {
         <>
           <div className="profile-container">
             <div className="profile-image">
-              {profile?.avatarUrl ? (
-                <img src={profile?.avatarUrl} />
+              {tempProfile?.avatarUrl ? (
+                <img src={tempProfile?.avatarUrl} />
               ) : (
                 <img src="https://www.wrkbemanning.no/wp-content/uploads/2017/04/profile-pic-dummy.jpg" />
               )}
 
               <div className="profile-info">
                 <h4>
-                  {profile?.firstName} {profile?.lastName}
+                  {tempProfile?.firstName} {tempProfile?.lastName}
                 </h4>
-                <small>@{profile?.username}</small>
+                <small>@{tempProfile?.username}</small>
               </div>
             </div>
 
             <div className="profile-description">
               <h4>{profile.bio}</h4>
               <small className="url">
-                Website{" "}
-                <Link target="_blank" to={profile?.website}>
-                  {profile?.website}
-                </Link>
+                {tempProfile?.website ? (
+                  <div>
+                    <BiLinkAlt size={15} />
+                    <Link target="_blank" to={tempProfile?.website}>
+                      {tempProfile?.website}{" "}
+                    </Link>
+                  </div>
+                ) : (
+                  "No Website Available"
+                )}
               </small>
             </div>
-
+            {/* tempPosts */}
             <div className="lower-profile-section">
-              <div className="item">{profile?.posts || 0} Posts</div>
+              <div className="item">{tempProfile?.posts || 0} Posts</div>
               <div className="item">
-                {profile?.followers?.length || 0} Followers
+                {tempProfile?.followers?.length || 0} Followers
               </div>
               <div className="item">
-                {profile?.following?.length || 0} Following
+                {tempProfile?.following?.length || 0} Following
               </div>
             </div>
-
-            {username === userInfo.username && (
+            {console.log(tempProfile?.username)}
+            {tempProfile?.username === userInfo.username && (
               <button onClick={showOpen}>
                 {" "}
                 <AiFillEdit /> Edit
@@ -94,15 +92,13 @@ const UserProfile = () => {
           </div>
 
           <div className="profile-posts">
-            {profileBasedPosts.length > 0 &&
-              profileBasedPosts?.map((post) => (
-                <Post post={post} key={post._id} />
-              ))}
+            {tempPosts.length > 0 &&
+              tempPosts?.map((post) => <Post post={post} key={post._id} />)}
           </div>
         </>
       )}
 
-      {modal && <EditProfile showClose={showClose} profile={profile} />}
+      {modal && <EditProfile showClose={showClose} profile={tempProfile} />}
     </>
   );
 };

@@ -1,30 +1,33 @@
-.filter{
-    display: flex;
-    /* flex-direction: column; */
+.filter {
+  display: flex;
+  /* flex-direction: column; */
 
-    justify-content: center;
-    box-shadow: 0px 0px 7px gray;
-    margin-left: 100px;
-    margin-bottom:30px;
-    width:80%;
-    height:30px;
+  justify-content: center;
+  box-shadow: 0 0 7px gray;
+  margin-left: 100px;
+  margin-bottom: 30px;
+  width: 80%;
+  height: 30px;
 }
-.filter-item-1{
-
-margin-right: 25px;
-
-
+.filter-item-1:hover,
+.filter-item-2:hover {
+  cursor: pointer;
+  font-weight: 500;
 }
-.filter-item-2{
+.filter div {
+  margin-left: 30px;
+  width: 50%;
+}
+.child-active {
+  /* background-color: antiquewhite; */
 
-    margin-left: 25px;
-  
-    
-    
-    
-    }
-.filter-item-1:hover, .filter-item-2:hover{
-    cursor:pointer;
-    font-weight: 500;  
-  
+  color: grey;
+  font-weight: 800;
+}
+.filter div:hover {
+  cursor: pointer;
+
+  color: black;
+
+  font-weight: 800;
 }
