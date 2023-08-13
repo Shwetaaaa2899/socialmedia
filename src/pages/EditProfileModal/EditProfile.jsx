@@ -8,15 +8,19 @@ import EmojiPicker from "emoji-picker-react";
 import { TbLetterX } from "react-icons/tb";
 import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
+import avatarLogo from "../../dummy-avatar.png";
+
 import AvatarModal from "../AvatarModal/AvatarModal";
-const EditProfile = ({ showClose, profile }) => {
+const EditProfile = ({ showClose, userData, setUserData }) => {
   const inputRef = useRef();
+
+  console.log(showClose, userData, setUserData, inputRef);
   const { updateProfile } = useUserContext();
 
   const [updatedAvatarImage, setUpdatedAvatarImage] = useState(
-    profile?.avatarUrl
+    userData?.avatarUrl
   );
-  const [edittedUserProfile, setEdittedUserProfile] = useState(profile);
+  const [edittedUserProfile, setEdittedUserProfile] = useState(userData);
 
   //  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const inputChangeHandler = (e) => {
@@ -39,8 +43,8 @@ const EditProfile = ({ showClose, profile }) => {
   };
   const EditProfileEventHandler = (e) => {
     e.preventDefault();
-
     updateProfile(edittedUserProfile);
+    // setEdittedUserProfile(edittedUserProfile);
     toast.success("Profile updated successfully");
     showClose();
   };
@@ -73,56 +77,55 @@ const EditProfile = ({ showClose, profile }) => {
           <form>
             <h4>Edit Profile</h4>
             <div className="form-group">
-              <div>
+              <div className="profile-image">
                 {edittedUserProfile?.avatarUrl ? (
-                  <div className="profile-image">
-                    <img
-                      name="avatarUrl"
-                      className="post-image-create-modal"
-                      style={{
-                        height: "100px",
-                        width: "100px",
-                        marginLeft: "20px",
-                      }}
-                      src={edittedUserProfile?.avatarUrl}
-                    />
-                    {/* <span className="cancel-img-btn">
-                    <TbLetterX
-                      onClick={() => {
-                        setEdittedUserProfile({ ...profile, avatarUrl: null });
-                      }}
-                    />
-                  </span> */}
-                    <div>
-                      {" "}
-                      <button
-                        className="btn-modal avatar"
-                        onClick={openAvatarModal}
-                      >
-                        Add Avatar
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  {
-                    /* <div>
-                  <MdOutlinePhotoCamera />
-
-                  <input
-                    type="file"
-                    name="mediaURL"
-                    onChange={ImageInputHandler}
-                    ref={inputRef}
-                    style={{ display: "none" }}
+                  <img
+                    name="avatarUrl"
+                    className="post-image-create-modal"
+                    style={{
+                      height: "100px",
+                      width: "100px",
+                      marginLeft: "20px",
+                    }}
+                    src={edittedUserProfile?.avatarUrl}
                   />
-                </div> */
-                  }
+                ) : (
+                  <img
+                    name="avatarUrl"
+                    className="post-image-create-modal"
+                    style={{
+                      height: "100px",
+                      width: "100px",
+                      marginLeft: "20px",
+                    }}
+                    src={avatarLogo}
+                  />
                 )}
+
+                <span className="cancel-img-btn">
+                  <TbLetterX
+                    onClick={() => {
+                      setEdittedUserProfile({
+                        ...userData,
+                        avatarUrl: null,
+                      });
+                    }}
+                  />
+                </span>
+                <div>
+                  {" "}
+                  <button
+                    className="btn-modal avatar"
+                    onClick={openAvatarModal}
+                  >
+                    Add Avatar
+                  </button>
+                </div>
               </div>
 
               {avatar && (
                 <AvatarModal
-                  profile={profile}
+                  profile={userData}
                   closeAvatarModal={closeAvatarModal}
                   setEdittedUserProfile={setEdittedUserProfile}
                 />
@@ -191,14 +194,14 @@ const EditProfile = ({ showClose, profile }) => {
             </div>
           </form>
 
-          {/* <button  onClick={openAvatarModal}>Add Avatar</button>
+          {/* <button onClick={openAvatarModal}>Add Avatar</button> */}
           {avatar && (
             <AvatarModal
-              profile={profile}
+              profile={userData}
               closeAvatarModal={closeAvatarModal}
               setEdittedUserProfile={setEdittedUserProfile}
             />
-          )} */}
+          )}
         </div>
       </div>
     </>

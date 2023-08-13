@@ -12,6 +12,19 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+input {
+  padding: 0.5rem;
+}
+button {
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.active,
+.active-link {
+  font-weight: bold;
+  background: #333;
+  color: white;
+}
 
 /* .App-header { */
 /* background-color: #282c34;

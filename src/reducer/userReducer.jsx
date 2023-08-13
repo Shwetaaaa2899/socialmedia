@@ -1,5 +1,22 @@
 export const UserReducer = (state, action) => {
   switch (action.type) {
+    case "SET-PROFILE":
+      console.log("profile call'", action.payload);
+      return { ...state, profile: action.payload, isLoggedIn: true };
+    case "EDIT-PROFILE-INFO":
+      return { ...state, profile: action.payload };
+    case "ADD-ADDRESS":
+      console.log(action.payload, "addiing address");
+      // return state
+      const FinalAddress = [...state.address, action.payload];
+      console.log(FinalAddress);
+      localStorage.setItem("address", JSON.stringify(FinalAddress));
+      return { ...state, address: FinalAddress };
+
+    case "ADD-SIGNED-UP-USER":
+      localStorage.setItem("users", JSON.stringify(action.payload));
+      console.log(action.payload);
+      return { ...state, users: [...state.users, action.payload] };
     case "DISPLAY-ALL-USERS":
       // console.log(state.user)
       const filteredUsers = action.payload?.filter(
@@ -28,7 +45,8 @@ export const UserReducer = (state, action) => {
       );
 
       return { ...state, users: updatedUsers };
-
+    case "FILTER-PROFILE-BASED-POSTS":
+      return { ...state, profileBasedPosts: [] };
     case "UNFOLLOW-A-USER":
       console.log("unfollow - user ius", action.payload);
       return { ...state, profile: action.payload };
@@ -39,8 +57,26 @@ export const UserReducer = (state, action) => {
         profileBasedPosts: action.payload,
       };
 
-    case "GET-PROFILE-INFO":
+    case "SET-PROFILE-INFO":
+      console.log("called", action.payload);
       return { ...state, profile: action.payload };
+    case "CLEAN-FILTER-POST-LOGOUT":
+      console.log("filter called");
+      return {
+        users: [],
+        //logged in user ka
+        //  profile:JSON.parse(localStorage.getItem('loginDetails')),
+        specificUser: [],
+        // following:[],
+        // ProfileToBeShown:{allgeneralprofile/loggedn},
+        usersToBeShown: [],
+        feed: [],
+        profileBasedPosts: [],
+        explore: [],
+        profile: {},
+        address: [],
+      };
+
     default:
       return state;
   }
@@ -48,7 +84,10 @@ export const UserReducer = (state, action) => {
 
 // const {firstName,lastName,following,followers,username,avatarUrl} = JSON.parse(localStorage.getItem("loginDetails")).user
 export const initialState = {
-  users: [],
+  users:
+    localStorage.getItem("users")?.length > 0
+      ? JSON.parse(localStorage.getItem("users"))
+      : [],
   //logged in user ka
   //  profile:JSON.parse(localStorage.getItem('loginDetails')),
   specificUser: [],
@@ -59,4 +98,5 @@ export const initialState = {
   profileBasedPosts: [],
   explore: [],
   profile: {},
+  address: [],
 };

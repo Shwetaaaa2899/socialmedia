@@ -9,6 +9,9 @@
   /* justify-content: space-between; */
 }
 
+.user-individual-container:hover {
+  cursor: pointer;
+}
 .user-individual-container {
   width: 270px;
   height: 3.5rem;

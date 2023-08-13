@@ -59,12 +59,15 @@ const Users = () => {
         <div className="users-container-wrapper">
           {userTobeShown?.map((user) => (
             <div className="user-individual-container">
-              <div className="image">
+              <div
+                className="image"
+                onClick={() => navigate(`/posts/user/${user?.username}`)}
+              >
                 <img src={user.avatarUrl} alt="avatar" />
               </div>
               <div
                 className="user-info"
-                onClick={() => navigate(`/posts/user/${user?._id}`)}
+                onClick={() => navigate(`/posts/user/${user?.username}`)}
               >
                 <p className="name">
                   {user.firstName} {user.lastName}
