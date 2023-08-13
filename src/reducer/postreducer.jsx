@@ -12,7 +12,7 @@ const PostReducer = (state, action) => {
     // prod.price<acc?acc = prod.price:acc,0)  console.log("max and min is",max,min)
 
     case "CREATE-A-POST":
-      console.log("post added", action.payload);
+      // console.log("post added", action.payload);
       return {
         ...state,
         posts: action.payload,
@@ -20,14 +20,14 @@ const PostReducer = (state, action) => {
     //case "DELETE-POST":
     // return {...state,search:action.payload}
     case "EDIT-POST":
-      console.log("post is red", action.payload);
+      // console.log("post is red", action.payload);
       return {
         ...state,
         posts: action.payload,
       };
 
     case "LIKED-A-POST":
-      console.log(action.payload);
+      // console.log(action.payload);
       //         const {LikedPosts, likedPostId} =  action.payload  const
       // likedPostByUser = state?.posts?.find((post) => post._id === likedPostId)
       // console.log("got posts from context",likedPostId,LikedPosts,"post found to be
