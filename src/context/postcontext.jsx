@@ -68,7 +68,7 @@ const PostsProvider = ({ children }) => {
         // const {UnLikedPosts, UnLikedPostId} =  action.payload
         dispatch({
           type: "UNLIKE-A-POST",
-          payload: { UnLikedPosts, UnLikedPostId },
+          payload: UnLikedPosts.posts,
         });
         toast.success("Post UnLiked");
       }
@@ -95,7 +95,7 @@ const PostsProvider = ({ children }) => {
       if (response.status === 201) {
         const { posts } = await response.json();
         // const {LikedPosts, likedPostId} =  action.payload
-        console.log("liked posts is", posts);
+        // console.log("liked posts is", posts);
 
         dispatch({ type: "LIKED-A-POST", payload: posts });
         toast.success("Post Liked");
@@ -106,6 +106,7 @@ const PostsProvider = ({ children }) => {
     } catch (e) {}
   };
   const isLiked = (postID) => {
+    console.log("post before unlinke", state);
     return state?.posts
       ?.find((post) => post._id === postID)
       ?.likes?.likedBy.some((user) => user.username === userInfo.username);
@@ -175,10 +176,10 @@ const PostsProvider = ({ children }) => {
   const getFeeds = () => {
     //getPosts()
     const posts = state.posts?.filter(
-    ({ username }) =>
-      username === userInfo?.username ||
-      userInfo?.following?.find((item) => item?.username === username)
-  );
+      ({ username }) =>
+        username === userInfo?.username ||
+        userInfo?.following?.find((item) => item?.username === username)
+    );
 
     // const feed = state?.posts.filter(
     //   (post) =>

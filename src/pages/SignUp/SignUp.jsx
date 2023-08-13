@@ -21,6 +21,14 @@ export default function SignUp() {
     firstName: "",
     lastName: "",
   });
+  const ValidateEmail = (inputText) => {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (inputText.value.match(mailformat)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const setInputHandler = (e) => {
     setUserSignUpDetails({
       ...userSignUpDetails,
@@ -64,7 +72,7 @@ export default function SignUp() {
               <div className="field1">
                 <label>
                   <p>
-                    <h3>FirstName:</h3>
+                    {/* <h3>FirstName:</h3> */}
                     <input
                       required
                       placeholder=" First Name"
@@ -76,7 +84,7 @@ export default function SignUp() {
                 </label>
                 <label>
                   <p>
-                    <h3>LastName:</h3>
+                    {/* <h3>LastName:</h3> */}
                     <input
                       required
                       placeholder="Last-Name"
@@ -88,7 +96,7 @@ export default function SignUp() {
                 </label>
                 <label>
                   <p>
-                    <h3>Username:</h3>
+                    {/* <h3>Username:</h3> */}
                     <input
                       required
                       placeholder="username"
@@ -100,11 +108,11 @@ export default function SignUp() {
                 </label>
                 <label>
                   <p>
-                    <h3>E-mail:</h3>
+                    {/* <h3>E-mail:</h3> */}
                     <input
                       required
                       placeholder="E-mail"
-                      type="text"
+                      type="email"
                       name="email"
                       onChange={setInputHandler}
                     />
@@ -112,53 +120,47 @@ export default function SignUp() {
                 </label>
 
                 <label>
-                  <p>
-                    <h3>Password:</h3>
+                  {/* <h3>Password:</h3> */}
 
-                    <div className="password-input">
-                      <input
-                        required
-                        placeholder="Password"
-                        type={passwordVisible ? "text" : "password"}
-                        name="password"
-                        onChange={setInputHandler}
-                      />
-                      <span
-                        onClick={() => setPasswordVisible(!passwordVisible)}
-                      >
-                        {passwordVisible ? (
-                          <AiOutlineEye />
-                        ) : (
-                          <AiOutlineEyeInvisible />
-                        )}
-                      </span>
-                    </div>
-                  </p>
+                  <div className="password-input">
+                    <input
+                      required
+                      placeholder="Password"
+                      type={passwordVisible ? "text" : "password"}
+                      name="password"
+                      onChange={setInputHandler}
+                    />
+                    <span onClick={() => setPasswordVisible(!passwordVisible)}>
+                      {passwordVisible ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </span>
+                  </div>
                 </label>
                 <label>
-                  <p>
-                    <h3>Confirm Password:</h3>
-                    <div className="password-input">
-                      <input
-                        required
-                        placeholder="Confirm Password"
-                        type={confirmPasswordType ? "text" : "password"}
-                        name="confirmPassword"
-                        onChange={setInputHandler}
-                      />
-                      <span
-                        onClick={() =>
-                          setConfirmPasswordType(!confirmPasswordType)
-                        }
-                      >
-                        {confirmPasswordType ? (
-                          <AiOutlineEye />
-                        ) : (
-                          <AiOutlineEyeInvisible />
-                        )}
-                      </span>
-                    </div>
-                  </p>
+                  {/* <h3>Confirm Password:</h3> */}
+                  <div className="password-input">
+                    <input
+                      required
+                      placeholder="Confirm Password"
+                      type={confirmPasswordType ? "text" : "password"}
+                      name="confirmPassword"
+                      onChange={setInputHandler}
+                    />
+                    <span
+                      onClick={() =>
+                        setConfirmPasswordType(!confirmPasswordType)
+                      }
+                    >
+                      {confirmPasswordType ? (
+                        <AiOutlineEye />
+                      ) : (
+                        <AiOutlineEyeInvisible />
+                      )}
+                    </span>
+                  </div>
                 </label>
               </div>
 

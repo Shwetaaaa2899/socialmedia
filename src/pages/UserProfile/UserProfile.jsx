@@ -10,80 +10,154 @@ import "./UserProfile.css";
 // import{dum} from "../../../src/instagram.png";
 import EditProfile from "../EditProfileModal/EditProfile";
 import { useAuth } from "../../context/authcontext";
+import { ClipLoader } from "react-spinners";
+import avatarLogo from "../../dummy-avatar.png";
 // import { usePostsConext } from "../../context/postcontext";
 const UserProfile = () => {
   const { username } = useParams();
-  console.log("hey user", username);
+  console.log(username);
   const [modal, setModal] = useState(false);
   const { userInfo } = useAuth();
   const {
-    state: { profile, users },
+    state: { profile, users, profileBasedPosts },
+    getUserHandler,
+    getAllUserPostsHandler,
+    dispatch,
   } = useUserContext();
   const {
     state: { posts },
   } = usePostsConext();
 
-  const tempProfile = users.find((user) => user._id === parseInt(username));
-  const tempPosts = posts.filter(
-    (post) => post.username === tempProfile.username
-  );
-  // console.log("temp profile is", tempPosts, tempProfile, users, username);
-  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [loading, setUsersLoading] = useState(false);
+
+  const getUserDetails = async () => {
+    try {
+      // console.log("Called", username, userData);
+      // setUsersLoading(true);
+      // const { data, status } = await fetch({
+      //   method: "GET",
+      //   url: `/api/users/${username}`,
+      // });
+      // if (status === 200 || status === 201) {
+      //   setUserData(data?.user);
+      //   getAllUserPostsHandler(username);
+      //   setUsersLoading(false);
+      //   console.log("Called 2", userData);
+
+      setUsersLoading(true);
+
+      const request = await fetch(`/api/users/${username}`);
+      // console.log(r);
+
+      const response = await request.json();
+      console.log(response, response.user);
+      if (request.status === 200 || request.status === 201) {
+        setUserData(response.user);
+
+        // setUserData(response.user);
+        getAllUserPostsHandler(username);
+        setUsersLoading(false);
+        // console.log("called", userData);
+        // dispatch({ type: "GET-PROFILE-INFO", payload: response.users });
+      }
+      // .then((resp) =>
+      //   resp
+      //     .json()
+      //     .then((final) =>
+      //       dispatch({ type: "GET-PROFILE-INFO", payload: final.users })
+      //     )
+      // );
+      // }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const showOpen = () => setModal(true);
 
   const showClose = () => setModal(false);
+  useEffect(() => {
+    getUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username, userInfo, posts]);
+
+  // useEffect(() => {
+  //   username !== userData.username && setUserData({});
+  // }, username);
+  // const tempProfile = users.find((user) => user._id === parseInt(username));
+  // const profileToBeShown = tempProfile ? tempProfile : getUserHandler(username);
+
+  // const tempPosts = profileBasedPosts
+  //   ? profileBasedPosts
+  //   : getAllUserPostsHandler(profileToBeShown.username);
+
+  // const [loading, setLoading] = useState(false);
+
+  // const showOpen = () => setModal(true);
+
+  // const showClose = () => setModal(false);
 
   //  console.log(profile)
   return (
     <>
       {loading ? (
-        <h1> Loadingg the data........</h1>
+        <h1>
+          {" "}
+          Loadingg the data........
+          <ClipLoader />
+        </h1>
       ) : (
         <>
           <div className="profile-container">
             <div className="profile-image">
-              {tempProfile?.avatarUrl ? (
-                <img src={tempProfile?.avatarUrl} />
+              {userData?.avatarUrl ? (
+                <img src={userData?.avatarUrl} alt="avatar" />
               ) : (
-                <img src="https://www.wrkbemanning.no/wp-content/uploads/2017/04/profile-pic-dummy.jpg" />
+                <img src={avatarLogo} alt="avatar" />
               )}
+              {/* <small>@{userData?.username}</small> */}
 
               <div className="profile-info">
-                <h4>
-                  {tempProfile?.firstName} {tempProfile?.lastName}
-                </h4>
-                <small>@{tempProfile?.username}</small>
+                <div>
+                  <h4>
+                    {userData?.firstName} {userData?.lastName}
+                  </h4>
+                </div>
+                <div>
+                  <small>@{userData?.username}</small>
+                </div>
               </div>
             </div>
 
             <div className="profile-description">
-              <h4>{profile.bio}</h4>
+              {/* <p>{userData?.username}-new username</p> */}
+              <h4>{profile?.bio}</h4>
               <small className="url">
-                {tempProfile?.website ? (
+                {userData?.website ? (
                   <div>
                     <BiLinkAlt size={15} />
-                    <Link target="_blank" to={tempProfile?.website}>
-                      {tempProfile?.website}{" "}
+                    <Link target="_blank" to={userData?.website}>
+                      {userData?.website}{" "}
                     </Link>
                   </div>
                 ) : (
-                  "No Website Available"
+                  "No Link Provided"
                 )}
               </small>
             </div>
             {/* tempPosts */}
             <div className="lower-profile-section">
-              <div className="item">{tempProfile?.posts || 0} Posts</div>
+              <div className="item">{userData?.posts || 0} Posts</div>
               <div className="item">
-                {tempProfile?.followers?.length || 0} Followers
+                {userData?.followers?.length || 0} Followers
               </div>
               <div className="item">
-                {tempProfile?.following?.length || 0} Following
+                {userData?.following?.length || 0} Following
               </div>
             </div>
-            {console.log(tempProfile?.username)}
-            {tempProfile?.username === userInfo.username && (
+            {/* {console.log(profileToBeShown?.username)} */}
+            {userData?.username === userInfo.username && (
               <button onClick={showOpen}>
                 {" "}
                 <AiFillEdit /> Edit
@@ -92,13 +166,21 @@ const UserProfile = () => {
           </div>
 
           <div className="profile-posts">
-            {tempPosts.length > 0 &&
-              tempPosts?.map((post) => <Post post={post} key={post._id} />)}
+            {profileBasedPosts.length > 0 &&
+              profileBasedPosts?.map((post) => (
+                <Post post={post} key={post._id} />
+              ))}
           </div>
         </>
       )}
 
-      {modal && <EditProfile showClose={showClose} profile={tempProfile} />}
+      {modal && (
+        <EditProfile
+          showClose={showClose}
+          userData={userData}
+          setUserData={setUserData}
+        />
+      )}
     </>
   );
 };
