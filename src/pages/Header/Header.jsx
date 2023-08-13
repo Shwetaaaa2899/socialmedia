@@ -38,7 +38,10 @@ const Header = () => {
           {/* <h4>Hello! <span className='navbar_username' onClick={()=>navigate(`/userprofile/${authState?.user?.username}`)}>{authState?.user?.firstName} {authState?.user?.lastName}</span></h4> */}
 
           <li className="item">
-            <Link target="_blank" to="https://github.com/Shwetaaaa2899">
+            <Link
+              target="_blank"
+              to="https://github.com/Shwetaaaa2899/socialmedia"
+            >
               <AiFillGithub />
             </Link>
           </li>
