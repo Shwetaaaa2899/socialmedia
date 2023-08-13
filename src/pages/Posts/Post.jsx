@@ -44,9 +44,7 @@ const Post = ({ post }) => {
   const [menu, setMenu] = useState(false);
   const openMenu = () => setMenu(true);
   const closeMenu = () => setMenu(false);
-  const showOptions = () => {
-    console.log();
-  };
+
   const date = new Date(post.createdAt).toLocaleDateString("en-US", {
     day: "numeric",
     month: "short",
@@ -127,6 +125,8 @@ const Post = ({ post }) => {
               : likePostHandler(post._id)
           }
         >
+          {" "}
+          <small style={{ fontSize: "15px" }}>{post?.likes?.likeCount}</small>
           {/* onClick={() => UnlikePostHandler(post._id)}> */}
           {isLiked(post._id) ? (
             <AiTwotoneLike size={20} />
@@ -134,7 +134,6 @@ const Post = ({ post }) => {
             <AiOutlineLike size={20} />
           )}
         </span>
-        <small style={{ fontSize: "15px" }}>{post?.likes?.likeCount}</small>
 
         <span className="icon" onClick={() => bookMarkPostHandler(post)}>
           {isBookMarked(post) ? (

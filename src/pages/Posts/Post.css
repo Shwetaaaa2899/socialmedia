@@ -44,24 +44,9 @@
   text-align: left;
   margin: 5px;
 }
-/*
-/* body{ */
-/* display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background:#fff
-} */
-/* 
-.container{
-    position:relative;
-    width:300px;
-    height:400px;
-    background:#fff;
-    box-shadow: 15px 15px 60px rgba(0.0.0.0.15);
-    padding:20px
-
-} */
+.action-btn span:hover {
+  cursor: pointer;
+}
 .post-container {
   height: 80vh;
   width: 80%;
@@ -142,6 +127,6 @@ li {
   margin: 2px;
 }
 
-.user-details-info:hover{
+.user-details-info:hover {
   cursor: pointer;
 }
