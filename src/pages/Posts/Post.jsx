@@ -37,13 +37,6 @@ const Post = ({ post }) => {
 
   const editPost = (e, post) => {
     e.preventDefault();
-    //  if(userInfo.username !== post.username) {
-    //   toast("U cant edit this")
-    //  }
-
-    //  else if( userInfo.username === post.username){
-    //   setModal(true)
-    //  }
 
     setModal(true);
   };
@@ -71,9 +64,7 @@ const Post = ({ post }) => {
     <div
       className={post?.mediaURL ? "post-container" : "post-no-img-container"}
     >
-      {/* <Link to = {`/posts/user/${post?.username}`}> */}
       <div className="user-profile-container">
-        {/* <div onClick = {() => navigate(`/posts/user/${post?.username}`)} > */}
         <div
           className="User-profile-picture"
           onClick={() => navigate(`/posts/user/${userprofileData?.username}`)}
@@ -128,16 +119,21 @@ const Post = ({ post }) => {
         </div>
       )}
       <div className="action-btn">
-        {isLiked(post) ? (
-          <span onClick={() => UnlikePostHandler(post._id)}>
+        <span
+          className="icon"
+          onClick={() =>
+            isLiked(post)
+              ? UnlikePostHandler(post._id)
+              : likePostHandler(post._id)
+          }
+        >
+          {/* onClick={() => UnlikePostHandler(post._id)}> */}
+          {isLiked(post._id) ? (
             <AiTwotoneLike size={20} />
-          </span>
-        ) : (
-          <span onClick={() => likePostHandler(post._id)}>
-            {" "}
+          ) : (
             <AiOutlineLike size={20} />
-          </span>
-        )}
+          )}
+        </span>
         <small style={{ fontSize: "15px" }}>{post?.likes?.likeCount}</small>
 
         <span className="icon" onClick={() => bookMarkPostHandler(post)}>
