@@ -33,18 +33,6 @@ const UserProfile = () => {
 
   const getUserDetails = async () => {
     try {
-      // console.log("Called", username, userData);
-      // setUsersLoading(true);
-      // const { data, status } = await fetch({
-      //   method: "GET",
-      //   url: `/api/users/${username}`,
-      // });
-      // if (status === 200 || status === 201) {
-      //   setUserData(data?.user);
-      //   getAllUserPostsHandler(username);
-      //   setUsersLoading(false);
-      //   console.log("Called 2", userData);
-
       setUsersLoading(true);
 
       const request = await fetch(`/api/users/${username}`);
@@ -55,20 +43,9 @@ const UserProfile = () => {
       if (request.status === 200 || request.status === 201) {
         setUserData(response.user);
 
-        // setUserData(response.user);
         getAllUserPostsHandler(username);
         setUsersLoading(false);
-        // console.log("called", userData);
-        // dispatch({ type: "GET-PROFILE-INFO", payload: response.users });
       }
-      // .then((resp) =>
-      //   resp
-      //     .json()
-      //     .then((final) =>
-      //       dispatch({ type: "GET-PROFILE-INFO", payload: final.users })
-      //     )
-      // );
-      // }
     } catch (e) {
       console.log(e);
     }
@@ -82,23 +59,6 @@ const UserProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, userInfo, posts]);
 
-  // useEffect(() => {
-  //   username !== userData.username && setUserData({});
-  // }, username);
-  // const tempProfile = users.find((user) => user._id === parseInt(username));
-  // const profileToBeShown = tempProfile ? tempProfile : getUserHandler(username);
-
-  // const tempPosts = profileBasedPosts
-  //   ? profileBasedPosts
-  //   : getAllUserPostsHandler(profileToBeShown.username);
-
-  // const [loading, setLoading] = useState(false);
-
-  // const showOpen = () => setModal(true);
-
-  // const showClose = () => setModal(false);
-
-  //  console.log(profile)
   return (
     <>
       {loading ? (
@@ -109,6 +69,9 @@ const UserProfile = () => {
         </h1>
       ) : (
         <>
+          <h2 style={{ marginBottom: "2rem" }}>
+            {userData?.firstName}'s Profile
+          </h2>
           <div className="profile-container">
             <div className="profile-image">
               {userData?.avatarUrl ? (
@@ -131,7 +94,6 @@ const UserProfile = () => {
             </div>
 
             <div className="profile-description">
-              {/* <p>{userData?.username}-new username</p> */}
               <h4>{profile?.bio}</h4>
               <small className="url">
                 {userData?.website ? (
