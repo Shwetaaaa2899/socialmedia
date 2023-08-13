@@ -25,10 +25,9 @@ const Feed = () => {
 
   const userInfo = JSON.parse(localStorage.getItem("loginDetails"));
   const [type, setType] = useState("Trending");
-  //  const[feed,setFeed] = useState(state.posts)  const { userInfo }= useAuth()
   useEffect(() => {
     getFeeds();
-  }, [state, posts]); //this state is of user context
+  }, [state, posts]);
 
   if (type === "Trending") {
     feeds = feeds?.sort((a, b) => b.likes.likeCount - a.likes.likeCount);

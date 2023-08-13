@@ -196,6 +196,7 @@ const PostsProvider = ({ children }) => {
 
   ///api/user/posts/--/api/posts/:postI
   const deletePostHandler = async (postId) => {
+    console.log(postId);
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
