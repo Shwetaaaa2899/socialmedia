@@ -1,5 +1,5 @@
 import "./AvatarModal.css";
-
+import { avatarDB } from "../../backend/db/avatar";
 const AvatarModal = ({ profile, closeAvatarModal, setEdittedUserProfile }) => {
   console.log("hey");
   return (
@@ -11,7 +11,20 @@ const AvatarModal = ({ profile, closeAvatarModal, setEdittedUserProfile }) => {
             &times;
           </button>
           <div className="avatars-container">
-            <div
+            {avatarDB?.map((image) => (
+              <div
+                className="avatar"
+                onClick={() =>
+                  setEdittedUserProfile({
+                    ...profile,
+                    avatarUrl: image,
+                  })
+                }
+              >
+                <img src={image} alt="avatar" />
+              </div>
+            ))}
+            {/* <div
               className="avatar"
               onClick={() =>
                 setEdittedUserProfile({
@@ -38,7 +51,7 @@ const AvatarModal = ({ profile, closeAvatarModal, setEdittedUserProfile }) => {
             <div className="avatar">
               {" "}
               <img src="https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1nfGVufDB8fDB8fHww&w=1000&q=80" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

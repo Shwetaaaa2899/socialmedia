@@ -19,15 +19,17 @@ export const LeftBar = ({ children }) => {
   const { userInfo } = useAuth();
   // consolelog("userinfo from leftbar ",userInfo)
   const routes = [
-    { name: "Feed", path: "/", icon: <AiOutlineHome /> },
+    { name: "User Feed", path: "/", icon: <AiOutlineHome /> },
+    ,
     { name: "Explore", path: "/explore", icon: <AiOutlineRocket /> },
+
     { name: "Liked Post", path: "/liked", icon: <AiOutlineLike /> },
 
     { name: "BookMark", path: "/bookmark", icon: <BsBookmark /> },
 
     {
       name: "Profile",
-      path: `/posts/user/${userInfo?._id}`,
+      path: `/posts/user/${userInfo?.username}`,
       icon: <CgProfile />,
     },
   ];
@@ -88,6 +90,7 @@ export const LeftBar = ({ children }) => {
         </div>
 
         <div className="main-content">
+          <h3></h3>
           <Outlet />
         </div>
         {modal && <CreatePost showClose={showClose} showOpen={showOpen} />}

@@ -48,9 +48,9 @@ export const UserProvider = ({ children }) => {
 
       if (request.status === 201 || request.status === 200) {
         const response = await request.json();
-
-        dispatch({ type: "SET-UPDATED-USER", payload: response.user });
-        dispatch({ type: "GET-PROFILE-INFO", payload: response.user });
+        setUserInfo(response.user);
+        // dispatch({ type: "SET-UPDATED-USER", payload: response.user });
+        // dispatch({ type: "SET-PROFILE-INFO", payload: response.user });
       }
     } catch (e) {}
   };
@@ -146,30 +146,35 @@ export const UserProvider = ({ children }) => {
    * */
 
   const getUserHandler = async (user) => {
-    const id = user?._id;
-
+    console.log(user);
     try {
-      const response = await fetch(`/api/users/${id}`);
-
-      if (response.status === 200 || response.status === 201) {
-        const finalResponse = await response.json();
-        // console.log("api resp is",finalResponse)
-        dispatch({ type: "GET-PROFILE-INFO", payload: finalResponse.user });
-      }
+      // const response = await fetch(`/api/users/${user}`);
+      // console.log("user-info resp is", response);
+      // if (response.status === 200 || response.status === 201) {
+      //   dispatch({ type: "GET-PROFILE-INFO", payload: response.user });
+      // }
+      fetch(`/api/users/${user}`).then((resp) =>
+        resp
+          .json()
+          .then((final) =>
+            dispatch({ type: "GET-PROFILE-INFO", payload: final.users })
+          )
+      );
     } catch (e) {
-      console.log("error in getuserhandler");
+      console.log(e);
     }
   };
 
   //2.quest at  /api/posts/user/:username
   const getAllUserPostsHandler = async (username) => {
     try {
+      console.log(username);
       const response = await fetch(`/api/posts/user/${username}`);
-      //   //console.log("post id is",response)
-      if (response.status === 200) {
+      console.log("post id is", response);
+      if (response.status === 200 || response.status === 201) {
         // //console.log(200)
         const { posts } = await response.json();
-
+        dispatch({ type: "FILTER-PROFILE-BASED-POSTS" });
         dispatch({ type: "GET-PROFILE-BASED-POSTS", payload: posts });
       }
     } catch (e) {}

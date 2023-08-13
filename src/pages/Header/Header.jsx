@@ -28,15 +28,28 @@ const Header = () => {
       <nav>
         <div className="logo">Logo</div>
         <ul className="nav-right">
-          <li className="item username">
+          {/* <li className="item username"> */}
+
+          {/* <p> {   Hi  - isLoggedIn && token &&  
+                 userInfo?.firstName}
+              
+                }
+                </p> */}
+          {/* </li> */}
+
+          {isLoggedIn && token && (
             <h4>
-              Hi
-              <span> {isLoggedIn && token && userInfo?.firstName}</span>
+              Hello!{" "}
+              {/* <span
+                className="navbar_username"
+                onClick={() =>
+                  navigate(`/userprofile/${authState?.user?.username}`)
+                }
+              > */}
+              {userInfo?.firstName}
+              {/* </span> */}
             </h4>
-          </li>
-
-          {/* <h4>Hello! <span className='navbar_username' onClick={()=>navigate(`/userprofile/${authState?.user?.username}`)}>{authState?.user?.firstName} {authState?.user?.lastName}</span></h4> */}
-
+          )}
           <li className="item">
             <Link target="_blank" to="https://github.com/Shwetaaaa2899">
               <AiFillGithub />

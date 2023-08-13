@@ -21,6 +21,7 @@ const Post = ({ post }) => {
     likePostHandler,
     deletePostHandler,
     isLiked,
+    UnlikePostHandler,
 
     isBookMarked,
     bookMarkPostHandler,
@@ -58,7 +59,6 @@ const Post = ({ post }) => {
     month: "short",
     year: "numeric",
   });
-  console.log(date);
 
   useEffect(() => {
     const finalResponse = users?.find(
@@ -76,7 +76,7 @@ const Post = ({ post }) => {
         {/* <div onClick = {() => navigate(`/posts/user/${post?.username}`)} > */}
         <div
           className="User-profile-picture"
-          onClick={() => navigate(`/posts/user/${userprofileData?._id}`)}
+          onClick={() => navigate(`/posts/user/${userprofileData?.username}`)}
         >
           {userprofileData?.avatarUrl ? (
             <img src={userprofileData?.avatarUrl} />
@@ -102,11 +102,13 @@ const Post = ({ post }) => {
 
         {modal && <EditPost updatedPost={post} setModal={setModal} />}
 
-        <span onClick={() => setMenu(!menu)} className="drop-down">
-          <div>
-            <BsThreeDotsVertical />
-          </div>
-        </span>
+        {userprofileData?.username === userInfo?.username && (
+          <span onClick={() => setMenu(!menu)} className="drop-down">
+            <div>
+              <BsThreeDotsVertical />
+            </div>
+          </span>
+        )}
         {menu && (
           <div className="options">
             <ul>
@@ -126,19 +128,18 @@ const Post = ({ post }) => {
         </div>
       )}
       <div className="action-btn">
-        <span
-          className="icon"
-          onClick={() => {
-            likePostHandler(post._id);
-          }}
-        >
-          {isLiked(post._id) ? (
+        {isLiked(post) ? (
+          <span onClick={() => UnlikePostHandler(post._id)}>
             <AiTwotoneLike size={20} />
-          ) : (
+          </span>
+        ) : (
+          <span onClick={() => likePostHandler(post._id)}>
+            {" "}
             <AiOutlineLike size={20} />
-          )}
-          <small style={{ fontSize: "15px" }}>{post?.likes.likeCount}</small>
-        </span>
+          </span>
+        )}
+        <small style={{ fontSize: "15px" }}>{post?.likes?.likeCount}</small>
+
         <span className="icon" onClick={() => bookMarkPostHandler(post)}>
           {isBookMarked(post) ? (
             <BsFillBookmarkFill size={18} />

@@ -110,7 +110,7 @@ export const posts = [
       "Exploring new web design trends. Can't wait to implement them in my next project! 😃🚀",
     mediaURL: "https://th.bing.com/th/id/OIP.4ttSBLTYgKLLfcDvM5wbuAHaE8?pid=ImgDet&rs=1",
     likes: {
-      likeCount: 0,
+      likeCount: 50,
       likedBy: [],
       dislikedBy: [],
     },
@@ -141,7 +141,7 @@ export const posts = [
     mediaURL:
       "https://th.bing.com/th/id/OIP.KyUwTl28keq1d-pbjsd_PQHaEo?pid=ImgDet&rs=1",
     likes: {
-      likeCount: 0,
+      likeCount: 14,
       likedBy: [],
       dislikedBy: [],
     },
@@ -214,7 +214,7 @@ export const posts = [
     mediaURL:
       "https://res.cloudinary.com/dptfwcnro/image/upload/v1685682994/SocialBuzz/istockphoto-1452556411-170667a_azhaoa.webp",
     likes: {
-      likeCount: 0,
+      likeCount: 20,
       likedBy: [],
       dislikedBy: [],
       avatarUrl:
@@ -244,7 +244,7 @@ export const posts = [
       "Designing a new logo for a client. Loving the creative process! 💡✍️",
     mediaURL: "",
     likes: {
-      likeCount: 0,
+      likeCount: 10,
       likedBy: [],
       dislikedBy: [],
     },
@@ -276,7 +276,7 @@ export const posts = [
     mediaURL:
       "https://res.cloudinary.com/dptfwcnro/image/upload/v1685683210/SocialBuzz/photo-1522898467493-49726bf28798_z48fvm.avif",
     likes: {
-      likeCount: 0,
+      likeCount: 30,
       likedBy: [],
       dislikedBy: [],
     },
@@ -304,7 +304,7 @@ export const posts = [
     content: "Just completed a challenging workout. Feeling energized! 💪💥",
     mediaURL: "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/health/wp-content/uploads/2021/07/BestTimeToWorkout.jpeg.jpg",
     likes: {
-      likeCount: 0,
+      likeCount: 20,
       likedBy: [],
       dislikedBy: [],
     },
@@ -345,7 +345,7 @@ export const posts = [
     mediaURL:
       "https://res.cloudinary.com/dptfwcnro/image/upload/v1685683277/SocialBuzz/photo-1579619168313-d2e074a7ee02_tdz0ft.avif",
     likes: {
-      likeCount: 0,
+      likeCount: 25,
       likedBy: [],
       dislikedBy: [],
     },
@@ -360,7 +360,7 @@ export const posts = [
       "Exploring a new city today. So many hidden gems to discover! ✈️🗺️",
     mediaURL: "",
     likes: {
-      likeCount: 0,
+      likeCount: 18,
       likedBy: [],
       dislikedBy: [],
     },
@@ -391,7 +391,7 @@ export const posts = [
     mediaURL:
       "https://res.cloudinary.com/dptfwcnro/image/upload/v1685683340/SocialBuzz/istockphoto-823840662-170667a_zho9lt.webp",
     likes: {
-      likeCount: 0,
+      likeCount: 20,
       likedBy: [],
       dislikedBy: [],
     },
@@ -432,7 +432,7 @@ export const posts = [
     mediaURL:
       "https://res.cloudinary.com/dptfwcnro/image/upload/v1685683392/SocialBuzz/istockphoto-1276788283-170667a_kyajsw.webp",
     likes: {
-      likeCount: 0,
+      likeCount: 34,
       likedBy: [],
       dislikedBy: [],
     },

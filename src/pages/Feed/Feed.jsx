@@ -22,19 +22,22 @@ const Feed = () => {
     state: { profile },
     state,
   } = useUserContext();
+
   const userInfo = JSON.parse(localStorage.getItem("loginDetails"));
-  const [type, setType] = useState("trending");
+  const [type, setType] = useState("Trending");
   //  const[feed,setFeed] = useState(state.posts)  const { userInfo }= useAuth()
   useEffect(() => {
     getFeeds();
   }, [state, posts]); //this state is of user context
 
-  if (type === "trending") {
-    feeds = feeds.sort((a, b) => b.likes.likeCount - a.likes.likeCount);
+  if (type === "Trending") {
+    feeds = feeds?.sort((a, b) => b.likes.likeCount - a.likes.likeCount);
   }
 
-  if (type === "latest") {
-    feeds = feeds.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  if (type === "Latest") {
+    feeds = feeds?.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
   }
 
   //   setFeeds([..filteredFeedsForLatest);
@@ -43,20 +46,25 @@ const Feed = () => {
     <div className="feed">
       <div className="filter">
         <div
-          className={type === "trending" ? "child-active" : "child"}
-          onClick={() => setType("trending")}
+          className={type === "Trending" ? "child-active" : "child"}
+          onClick={() => setType("Trending")}
         >
           Trending
         </div>
         <div
-          className={type === "latest" ? "child-active" : "child"}
-          onClick={() => setType("latest")}
+          className={type === "Latest" ? "child-active" : "child"}
+          onClick={() => setType("Latest")}
         >
           Latest
         </div>
       </div>
       {feeds?.length > 0 ? (
-        feeds?.map((post) => <Post key={post._id} post={post} />)
+        <div>
+          <h3>{type} Posts</h3>
+          {feeds?.map((post) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
       ) : (
         <h1>No Posts yet to be shown</h1>
       )}

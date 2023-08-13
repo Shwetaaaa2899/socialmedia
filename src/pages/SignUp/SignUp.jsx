@@ -21,6 +21,14 @@ export default function SignUp() {
     firstName: "",
     lastName: "",
   });
+  const ValidateEmail = (inputText) => {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (inputText.value.match(mailformat)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const setInputHandler = (e) => {
     setUserSignUpDetails({
       ...userSignUpDetails,
@@ -104,7 +112,7 @@ export default function SignUp() {
                     <input
                       required
                       placeholder="E-mail"
-                      type="text"
+                      type="email"
                       name="email"
                       onChange={setInputHandler}
                     />
