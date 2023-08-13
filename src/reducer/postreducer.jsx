@@ -51,10 +51,13 @@ const PostReducer = (state, action) => {
         bookMark: filteredBookMarkPosts,
       };
 
-    case "SORT-POSTS":
+    case "SORT-BY-LATEST":
+      console.log("called");
       return {
         ...state,
-        feed: action.payload,
+        feed: [...state.feed]?.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
       };
 
     default:

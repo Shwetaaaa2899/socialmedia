@@ -23,8 +23,6 @@ const PostsProvider = ({ children }) => {
   const [displayposts, setPosts] = useState([]);
   const [posts, setPost] = useState([]);
   const [state, dispatch] = useReducer(PostReducer, initialState);
-  // const[]
-  // const [state, dispatch] = useReducer(ProductsReducer, initialState);
 
   // 1.get all posts  from db
   const getPosts = async () => {
@@ -94,19 +92,15 @@ const PostsProvider = ({ children }) => {
 
       if (response.status === 201) {
         const { posts } = await response.json();
-        // const {LikedPosts, likedPostId} =  action.payload
-        // console.log("liked posts is", posts);
 
         dispatch({ type: "LIKED-A-POST", payload: posts });
         toast.success("Post Liked");
       } else if (response.status === 400) {
-        //  toast("Cannot like a post that is already liked. ")
         UnlikePostHandler(likedPostId);
       }
     } catch (e) {}
   };
   const isLiked = (postID) => {
-    console.log("post before unlinke", state);
     return state?.posts
       ?.find((post) => post._id === postID)
       ?.likes?.likedBy.some((user) => user.username === userInfo.username);
@@ -131,6 +125,8 @@ const PostsProvider = ({ children }) => {
         const { posts } = await response.json();
         // console.log("post is",posts)
         dispatch({ type: "CREATE-A-POST", payload: posts });
+        dispatch({ type: " SORT-BY-LATEST" });
+
         toast.success("Post created successfully !");
       }
     } catch (e) {}
@@ -174,22 +170,11 @@ const PostsProvider = ({ children }) => {
 
   //get all feed
   const getFeeds = () => {
-    //getPosts()
     const posts = state.posts?.filter(
       ({ username }) =>
         username === userInfo?.username ||
         userInfo?.following?.find((item) => item?.username === username)
     );
-
-    // const feed = state?.posts.filter(
-    //   (post) =>
-    //     post.username === userInfo?.username ||
-    //     userInfo?.following?.some(
-    //       (user) => Number(user._id) === Number(post._id)
-    //     )
-    // );
-
-    //||  userInfo?.following?.includes((user) =>user.username === post.username))
 
     dispatch({ type: "GET-FEEDS", payload: posts });
   };
