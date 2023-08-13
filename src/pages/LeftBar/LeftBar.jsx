@@ -58,12 +58,7 @@ export const LeftBar = ({ children }) => {
                   onClick={() => setActiveId(route.name)}
                   className={activeId === route.name ? "active-link" : "link"}
                 >
-                  <NavLink
-                    activeClassName="active"
-                    className="link"
-                    to={route.path}
-                    key={route.name}
-                  >
+                  <NavLink className="link" to={route.path} key={route.name}>
                     <div className="icon">{route.icon}</div>
                     <div className="text">{route.name}</div>
                   </NavLink>
