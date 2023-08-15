@@ -75,7 +75,7 @@ const Post = ({ post }) => {
         </div>
         <div
           className="user-details-info"
-          onClick={() => navigate(`/posts/user/${userprofileData?._id}`)}
+          onClick={() => navigate(`/posts/user/${userprofileData?.username}`)}
         >
           <h4>
             {userprofileData?.firstName} {userprofileData?.lastName}

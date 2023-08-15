@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
   const { token, isLoggedIn, setUserInfo, userInfo, EditUserInfoHandler } =
     useAuth();
-  // //console.log("got token from context",token)
+
   const [users, setUsers] = useState([]);
   // logic to update exting localstorage
 
@@ -23,18 +23,11 @@ export const UserProvider = ({ children }) => {
     setUserInfo(updatedData);
     console.log("onfo chnged", userInfo.following);
     localStorage.setItem("loginDetails", JSON.stringify(profile));
-    //   console.log("data came for updating is",JSON.parse(localStorage.getItem('loginDetails')))
     editUserHandler(updatedData);
-
-    //     dispatch({type:"SET-PROFILE",payload:updatedData})
-    //
-
-    // dispatch({type:"GET-PROFILE-BASED-POSTS",payload:posts})
   };
   //edit user info
   const editUserHandler = async (updatedData) => {
     try {
-      // console.log("came in 2nd block", updatedData)
       const dataToBePassed = { userData: updatedData };
       const request = await fetch("/api/users/edit", {
         method: "POST",
@@ -49,8 +42,6 @@ export const UserProvider = ({ children }) => {
       if (request.status === 201 || request.status === 200) {
         const response = await request.json();
         setUserInfo(response.user);
-        // dispatch({ type: "SET-UPDATED-USER", payload: response.user });
-        // dispatch({ type: "SET-PROFILE-INFO", payload: response.user });
       }
     } catch (e) {}
   };
@@ -64,7 +55,6 @@ export const UserProvider = ({ children }) => {
             dispatch({ type: "DISPLAY-ALL-USERS", payload: final.users })
           )
       );
-      // dispatch({type:"DISPLAY-ALL-USERS",type:final.users})
     } catch (e) {
       //console.log(e)
     }
@@ -82,13 +72,11 @@ export const UserProvider = ({ children }) => {
           authorization: token,
         },
       });
-      console.log(sendreq);
+
       if (sendreq.status === 200) {
-        // const {
-        //   user,
-        //   followUser: { firstName, lastName },
-        // } = await sendreq. json();
         const response = await sendreq.json();
+        console.log(response.user);
+
         setUserInfo(response.user);
         toast(
           `You started follwing  ${response.followUser.firstName} ${response.followUser.lastName}`
