@@ -112,10 +112,19 @@ const UserProfile = () => {
             <div className="lower-profile-section">
               <div className="item">{userData?.posts || 0} Posts</div>
               <div className="item">
-                {userData?.followers?.length || 0} Followers
+                {userData?.followers?.length !== 0 &&
+                userData?.followers?.length > 0
+                  ? +1
+                  : 0}{" "}
+                Followers
               </div>
               <div className="item">
-                {userData?.following?.length || 0} Following
+                {console.log("length ", userData?.following)}
+                {userData?.following?.length !== 0 &&
+                userData?.following?.length > 0
+                  ? userData?.following?.length + 1
+                  : 0}{" "}
+                Following
               </div>
             </div>
             {/* {console.log(profileToBeShown?.username)} */}

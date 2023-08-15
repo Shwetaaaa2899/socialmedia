@@ -4,7 +4,7 @@ import { useUserContext } from "../../context/usercontext";
 import { usePostsContext } from "../../context/postcontext";
 // import { SortContainer } from "";
 import "./Feed.css";
-
+import { ClipLoader } from "react-spinners";
 import { useState, useEffect } from "react";
 import Post from "../Posts/Post";
 const Feed = () => {
@@ -22,11 +22,14 @@ const Feed = () => {
     state: { profile },
     state,
   } = useUserContext();
+  const [loader, setLoader] = useState(false);
 
   const userInfo = JSON.parse(localStorage.getItem("loginDetails"));
   const [type, setType] = useState("Trending");
   useEffect(() => {
+    setLoader(true);
     getFeeds();
+    setLoader(false);
   }, [state, posts]);
 
   if (type === "Trending") {
@@ -43,6 +46,13 @@ const Feed = () => {
 
   return (
     <div className="feed">
+      {loader && (
+        <h1>
+          {" "}
+          Loadingg the feed........
+          <ClipLoader />
+        </h1>
+      )}
       <div className="filter">
         <div
           className={type === "Trending" ? "child-active" : "child"}
