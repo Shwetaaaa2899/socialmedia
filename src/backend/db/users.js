@@ -22,6 +22,38 @@ export const users = [
     createdAt: formatDate(),
     website: "",
     updatedAt: formatDate(),
+    following: [
+      {
+        _id: 3,
+        firstName: "Shweta",
+        lastName: "Jha",
+        username: "shwetaj",
+        password: "shweta@123",
+        bio: "Learning React💻✨ by building projects",
+        bookmarks: [],
+        website: "https://github.com/Shwetaaaa2899",
+
+        createdAt: "2022-01-01T10:55:06+05:30",
+        updatedAt: formatDate(),
+        avatarUrl:
+          "https://1fid.com/wp-content/uploads/2022/06/cartoon-profile-picture-6-1024x1024.jpg",
+      },
+      {
+        _id: 4,
+        firstName: "Alice",
+        lastName: "Jones",
+        username: "alicejohnson",
+        password: "alice123",
+        bio: "Software Developer 👩‍💻💡.Passionate about technology and creating innovative software 🌟🚀",
+        bookmarks: [],
+        avatarUrl:
+          "https://res.cloudinary.com/dptfwcnro/image/upload/v1685596157/SocialBuzz/images_vrd6b5.jpg",
+        website: "https://alicejohnson.com/",
+        createdAt: "2022-05-15T08:30:00+05:30",
+        updatedAt: formatDate(),
+      },
+    ],
+
     avatarUrl:
       "https://i.pinimg.com/originals/22/04/a8/2204a80672494b512d779aa3fe119744.jpg",
   },
@@ -37,6 +69,21 @@ export const users = [
 
     createdAt: "2022-01-01T10:55:06+05:30",
     updatedAt: formatDate(),
+    followers: [
+      {
+        _id: 2,
+        firstName: "Adarsh",
+        lastName: "Balika",
+        username: "adarshbalika",
+        password: "adarshBalika123",
+        bio: "Frontend Developer 💻✨Turning ideas into beautiful and interactive websites✨🚀",
+        createdAt: formatDate(),
+        website: "",
+        updatedAt: formatDate(),
+        avatarUrl:
+          "https://i.pinimg.com/originals/22/04/a8/2204a80672494b512d779aa3fe119744.jpg",
+      },
+    ],
     avatarUrl:
       "https://1fid.com/wp-content/uploads/2022/06/cartoon-profile-picture-6-1024x1024.jpg",
   },
@@ -54,6 +101,21 @@ export const users = [
     website: "https://alicejohnson.com/",
     createdAt: "2022-05-15T08:30:00+05:30",
     updatedAt: formatDate(),
+    followers: [
+      {
+        _id: 2,
+        firstName: "Adarsh",
+        lastName: "Balika",
+        username: "adarshbalika",
+        password: "adarshBalika123",
+        bio: "Frontend Developer 💻✨Turning ideas into beautiful and interactive websites✨🚀",
+        createdAt: formatDate(),
+        website: "",
+        updatedAt: formatDate(),
+        avatarUrl:
+          "https://i.pinimg.com/originals/22/04/a8/2204a80672494b512d779aa3fe119744.jpg",
+      },
+    ],
   },
   {
     _id: 5,

@@ -19,9 +19,11 @@ button {
   padding: 0.5rem;
   border-radius: 5px;
 }
-.active,
-.active-link {
+.active {
   font-weight: bold;
+  background: #333;
+  color: white;
+
   background: #333;
   color: white;
 }

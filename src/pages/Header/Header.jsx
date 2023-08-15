@@ -51,7 +51,10 @@ const Header = () => {
             </h4>
           )}
           <li className="item">
-            <Link target="_blank" to="https://github.com/Shwetaaaa2899">
+            <Link
+              target="_blank"
+              to="https://github.com/Shwetaaaa2899/socialmedia"
+            >
               <AiFillGithub />
             </Link>
           </li>

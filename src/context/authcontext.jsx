@@ -120,7 +120,7 @@ const AuthProvider = ({ children }) => {
       });
       const response = await sendreq.json();
 
-      //console.log("response for log in ",response)
+      // console.log("response for log in ", response);
 
       if (sendreq.status === 200) {
         localStorage.setItem(

@@ -14,7 +14,6 @@ import AvatarModal from "../AvatarModal/AvatarModal";
 const EditProfile = ({ showClose, userData, setUserData }) => {
   const inputRef = useRef();
 
-  console.log(showClose, userData, setUserData, inputRef);
   const { updateProfile } = useUserContext();
 
   const [updatedAvatarImage, setUpdatedAvatarImage] = useState(
@@ -24,15 +23,12 @@ const EditProfile = ({ showClose, userData, setUserData }) => {
 
   //  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const inputChangeHandler = (e) => {
-    console.log("new v is", e.target.value);
-
     setEdittedUserProfile({
       ...edittedUserProfile,
       [e.target.name]: e.target.value,
     });
   };
 
-  ///post.likes.likedby.find(({id})=> userInfo._id ) --> "red" --> liek ka logic
   const modalHandler = (e) => {
     if (
       e.target.className === "modal-container" ||
