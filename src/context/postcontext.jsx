@@ -123,7 +123,7 @@ const PostsProvider = ({ children }) => {
 
       if (response.status === 201) {
         const { posts } = await response.json();
-        // console.log("post is",posts)
+        console.log("post is", posts);
         dispatch({ type: "CREATE-A-POST", payload: posts });
         dispatch({ type: " SORT-BY-LATEST" });
 

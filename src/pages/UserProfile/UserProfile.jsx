@@ -58,6 +58,7 @@ const UserProfile = () => {
     getUserDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, userInfo, posts]);
+  const userPostsCounts = posts.filter((post) => post.username === username);
 
   return (
     <>
@@ -110,7 +111,7 @@ const UserProfile = () => {
             </div>
             {/* tempPosts */}
             <div className="lower-profile-section">
-              <div className="item">{userData?.posts || 0} Posts</div>
+              <div className="item">{userPostsCounts.length} Posts</div>
               <div className="item">
                 {userData?.followers?.length !== 0 &&
                 userData?.followers?.length > 0
