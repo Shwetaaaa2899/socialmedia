@@ -114,7 +114,7 @@ const UserProfile = () => {
               <div className="item">
                 {userData?.followers?.length !== 0 &&
                 userData?.followers?.length > 0
-                  ? +1
+                  ? userData?.followers?.length
                   : 0}{" "}
                 Followers
               </div>
@@ -122,7 +122,7 @@ const UserProfile = () => {
                 {console.log("length ", userData?.following)}
                 {userData?.following?.length !== 0 &&
                 userData?.following?.length > 0
-                  ? userData?.following?.length + 1
+                  ? userData?.following?.length
                   : 0}{" "}
                 Following
               </div>
